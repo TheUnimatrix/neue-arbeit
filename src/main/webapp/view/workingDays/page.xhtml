@@ -1,147 +1,137 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/pageTemplate.xhtml"
+				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:b="http://bootsfaces.net/ui">
+	<ui:define name="pageContent">
+		<h1>#{commonRsc.workingDays_header}</h1>
 
-	<ui:composition template="/WEB-INF/templates/pageTemplate.xhtml">
-		<ui:define name="pageContent">
-			<h1>#{commonRsc.workingDays_header}</h1>
-			
-			<!-- 
-			<t:dataList id="errorList" styleClass="errorList"
-				value="#{workingDaysBean.errorList}" var="error"
-				layout="unorderedList">
-				<h:outputText value="#{error}"/>
-			</t:dataList>
-			-->
-			
-			<!--
-			xmlns:tc="http://myfaces.apache.org/tobago/component"
-			<tc:in label="Hallo Welt" value="TEST"/>
-			-->
-			
-			<p>#{commonRsc.workingDays_content_01}</p>
-			<p>#{commonRsc.workingDays_content_02}</p>
-			<p>#{commonRsc.workingDays_content_03}</p>
-			<p>#{commonRsc.workingDays_content_04}</p>
-			
+		<!--
+        <t:dataList id="errorList" styleClass="errorList"
+            value="#{workingDaysBean.errorList}" var="error"
+            layout="unorderedList">
+            <h:outputText value="#{error}"/>
+        </t:dataList>
+        -->
+
+		<!--
+        xmlns:tc="http://myfaces.apache.org/tobago/component"
+        <tc:in label="Hallo Welt" value="TEST"/>
+        -->
+
+		<p>#{commonRsc.workingDays_content_01}</p>
+		<p>#{commonRsc.workingDays_content_02}</p>
+		<p>#{commonRsc.workingDays_content_03}</p>
+		<p>#{commonRsc.workingDays_content_04}</p>
+
+		<div class="largeDistance"></div>
+
+		<!--			<b:form>-->
+		<!--				<b:row>-->
+		<!--					<b:column>#{commonRsc.workingDays_content_spaceOfTime}</b:column>-->
+		<!--					<b:column>-->
+		<!--						<b:radiobutton name="space-of-time" value="#{workingDaysBean.spaceOfTimeSelection}">-->
+		<!--							<f:selectItems value="#{workingDaysBean.spaceOfTimeList}"/>-->
+		<!--							<f:ajax render="@form"/>-->
+		<!--						</b:radiobutton>-->
+		<!--					</b:column>-->
+		<!--				</b:row>-->
+		<!--				<b:row>-->
+		<!--				</b:row>-->
+		<!--			</b:form>-->
+
+		<h:form id="workingDaysForm">
+			<div class="boxDefinedLarge">
+				#{commonRsc.workingDays_content_spaceOfTime}
+			</div>
+
+			<div class="boxDefinedOpen">
+				<h:selectOneRadio id="spaceOfTime"
+								  value="#{workingDaysBean.spaceOfTimeSelection}"
+								  layout="pageDirection">
+					<f:selectItems value="#{workingDaysBean.spaceOfTimeList}"/>
+					<f:ajax render="@form"/>
+				</h:selectOneRadio>
+			</div>
+
 			<div class="largeDistance"></div>
 
-			<b:form>
-				<b:row>
-					<b:column>#{commonRsc.workingDays_content_spaceOfTime}</b:column>
-					<b:column>
-						<b:radiobutton name="space-of-time" value="#{workingDaysBean.spaceOfTimeSelection}">
-							<f:selectItems value="#{workingDaysBean.spaceOfTimeList}"/>
-							<f:ajax render="@form"/>
-						</b:radiobutton>
-					</b:column>
-				</b:row>
-
-				<b:row>
-
-				</b:row>
-			</b:form>
-
-			<h:form id="workingDaysForm">
-				<div class="boxDefinedLarge">
-					#{commonRsc.workingDays_content_spaceOfTime}
-				</div>
-				
-				<div class="boxDefinedOpen">
-					<h:selectOneRadio id="spaceOfTime"
-						value="#{workingDaysBean.spaceOfTimeSelection}"
-						layout="pageDirection">
-						<f:selectItems value="#{workingDaysBean.spaceOfTimeList}"/>
-						<f:ajax render="@form"/>
-					</h:selectOneRadio>
-				</div>
-				
-				<div class="largeDistance"></div>
-				
 			<!-- PanelGroup wird nur angezeigt, wenn Zeitraum in Jahren ausgewählt -->
-				<h:panelGroup class="#{workingDaysBean.spaceOfTimeSelection == 'spaceOfTime_Years' ? 'show' : 'hide'}">
-					<div class="boxDefinedLarge">
-						#{commonRsc.workingDays_spaceOfTime_years}
+			<h:panelGroup styleClass="#{workingDaysBean.spaceOfTimeSelection == 'spaceOfTime_Years' ? 'show' : 'hide'}">
+				<div class="boxDefinedLarge">
+					#{commonRsc.workingDays_spaceOfTime_years}
+				</div>
+
+				<div class="boxDefinedOpen">
+					<div class="boxDefinedSmall">
+						<h:outputLabel id="startYear_Label" for="startYear"
+									   value="#{commonRsc.workingDays_startYear_label_value}"
+									   title="#{commonRsc.workingDays_startYear_label_title}"/>
 					</div>
-					
-					<div class="boxDefinedOpen">
-						<div class="boxDefinedSmall">
-							<h:outputLabel id="startYear_Label" for="startYear"
-								value="#{commonRsc.workingDays_startYear_label_value}"
-								title="#{commonRsc.workingDays_startYear_label_title}"/>
-						</div>
-						<div class="boxDefinedMedium">
-							<h:selectOneMenu id="startYear"
-								value="#{workingDaysBean.startYear}"
-								onchange="selectValueChange(this,this.form)">
-								<f:selectItems value="#{workingDaysBean.yearList}"/>
-							</h:selectOneMenu>
-						</div>
-						
-						<div class="smallDistance"></div>
-						
-						<div class="boxDefinedSmall">
-							<h:outputLabel id="endYear_Label" for="endYear"
-								value="#{commonRsc.workingDays_endYear_label_value}"
-								title="#{commonRsc.workingDays_endYear_label_title}"/>
-						</div>
-						<div class="boxDefinedMedium">
-							<h:selectOneMenu id="endYear"
-								value="#{workingDaysBean.endYear}"
-								onchange="selectValueChange(this,this.form)">
-								<f:selectItems value="#{workingDaysBean.yearList}"/>
-							</h:selectOneMenu>
-						</div>
+					<div class="boxDefinedMedium">
+						<h:selectOneMenu id="startYear"
+										 value="#{workingDaysBean.startYear}"
+										 onchange="selectValueChange(this,this.form)">
+							<f:selectItems value="#{workingDaysBean.yearList}"/>
+						</h:selectOneMenu>
 					</div>
-				</h:panelGroup>
-				
+
+					<div class="smallDistance"></div>
+
+					<div class="boxDefinedSmall">
+						<h:outputLabel id="endYear_Label" for="endYear"
+									   value="#{commonRsc.workingDays_endYear_label_value}"
+									   title="#{commonRsc.workingDays_endYear_label_title}"/>
+					</div>
+					<div class="boxDefinedMedium">
+						<h:selectOneMenu id="endYear"
+										 value="#{workingDaysBean.endYear}"
+										 onchange="selectValueChange(this,this.form)">
+							<f:selectItems value="#{workingDaysBean.yearList}"/>
+						</h:selectOneMenu>
+					</div>
+				</div>
+			</h:panelGroup>
+
 			<!-- PanelGroup wird nur angezeigt, wenn Zeitraum mit Datumsangaben ausgewählt -->
-				<h:panelGroup class="#{workingDaysBean.spaceOfTimeSelection == 'spaceOfTime_Dates' ? 'show' : 'hide'}">
-					<div class="boxDefinedLarge">
-						#{commonRsc.workingDays_spaceOfTime_dates}
+			<h:panelGroup styleClass="#{workingDaysBean.spaceOfTimeSelection == 'spaceOfTime_Dates' ? 'show' : 'hide'}">
+				<div class="boxDefinedLarge">
+					#{commonRsc.workingDays_spaceOfTime_dates}
+				</div>
+
+				<div class="boxDefinedOpen">
+					<div class="boxDefinedSmall">
+						<h:outputLabel id="startDate_Label" for="startDate"
+									   value="#{commonRsc.workingDays_startDate_label_value}"
+									   title="#{commonRsc.workingDays_startDate_label_title}"/>
 					</div>
-					
-					<div class="boxDefinedOpen">
-						<div class="boxDefinedSmall">
-							<h:outputLabel id="startDate_Label" for="startDate"
-									value="#{commonRsc.workingDays_startDate_label_value}"
-									title="#{commonRsc.workingDays_startDate_label_title}"/>
-						</div>
-						<div class="boxDefinedMedium">
-							<h:inputText id="startDate" maxlength="10"
-									value="#{workingDaysBean.startDate}"
-									class="inputTextDefinedMedium"/>
-						</div>
-						
-						<div class="smallDistance"></div>
-						
-						<div class="boxDefinedSmall">
-							<h:outputLabel id="endDate_Label" for="endDate"
-									value="#{commonRsc.workingDays_endDate_label_value}"
-									title="#{commonRsc.workingDays_endDate_label_title}"/>
-						</div>
-						<div class="boxDefinedMedium">
-							<h:inputText id="endDate" maxlength="10"
-									value="#{workingDaysBean.endDate}"
-									class="inputTextDefinedMedium"/>
-						</div>
+					<div class="boxDefinedMedium">
+						<h:inputText id="startDate" maxlength="10" value="#{workingDaysBean.startDate}"
+									 styleClass="inputTextDefinedMedium"/>
 					</div>
-				</h:panelGroup>
-				
-				<div class="largeDistance"></div>
-				
-				<div class="boxDefinedMedium">
-					<h:commandButton
+
+					<div class="smallDistance"></div>
+
+					<div class="boxDefinedSmall">
+						<h:outputLabel id="endDate_Label" for="endDate"
+									   value="#{commonRsc.workingDays_endDate_label_value}"
+									   title="#{commonRsc.workingDays_endDate_label_title}"/>
+					</div>
+					<div class="boxDefinedMedium">
+						<h:inputText id="endDate" maxlength="10"
+									 value="#{workingDaysBean.endDate}"
+									 styleClass="inputTextDefinedMedium"/>
+					</div>
+				</div>
+			</h:panelGroup>
+
+			<div class="largeDistance"></div>
+
+			<div class="boxDefinedMedium">
+				<h:commandButton
 						value="#{commonRsc.workingDays_submitButton_value}"
 						action="#{workingDaysBean.validateInput}"/>
-				</div>
-			</h:form>
-		</ui:define>
-	</ui:composition>
-	
-</html>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
