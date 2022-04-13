@@ -12,9 +12,8 @@ import org.apache.commons.logging.LogFactory;
 import de.sgirke.neuearbeit.model.Holiday;
 
 /**
- * Service-Implementierung zum Berechnen der Arbeitstage für einen bestimmten
- * Zeitraum in Jahren oder mit Datumsangaben sowie zum Erstellen einer XML mit
- * den angeforderten Daten.
+ * Service-Implementierung zum Berechnen der Arbeitstage für einen bestimmten Zeitraum in Jahren oder mit Datumsangaben
+ * sowie zum Erstellen einer XML mit den angeforderten Daten.
  * @author Sebastian Girke
  */
 public class WorkingDaysServiceImpl implements WorkingDaysService {
@@ -22,25 +21,18 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 	/** Logger-Objekt */
 	private static final Log LOG = LogFactory.getLog(WorkingDaysServiceImpl.class);
 	
-	/**
-	 * Liste mit den Namen aller Monate
-	 */
-	private static List<String> monthList;
+	/** Liste mit den Namen aller Monate */
+	private static final List<String> monthList;
 	
-	/**
-	 * Service-Objekt zum Holen aller gesetzlichen Feiertage in Thüringen in
-	 * Listenform
-	 */
+	/** Service-Objekt zum Holen aller gesetzlichen Feiertage in Thüringen in Listenform */
 	private HolidayService holidayService;
 	
-	/**
-	 * Service-Objekt zum Erstellen einer XML als String-Repräsentation
-	 */
+	/** Service-Objekt zum Erstellen einer XML als String-Repräsentation */
 	private XmlService xmlService;
 	
 	// Befüllen der statischen Liste mit allen Monatsnamen
 	static {
-		monthList = new ArrayList<String>();
+		monthList = new ArrayList<>();
 		monthList.add("Januar");
 		monthList.add("Februar");
 		monthList.add("März");
@@ -93,8 +85,7 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 	 */
 	public String calculateWorkingDays(Integer startYear, Integer endYear) {
 		// Hole Liste mit allen Feiertagen für das aktuelle Jahr
-		List<Holiday> holidayList =
-				holidayService.getAllHolidays(startYear, endYear);
+		List<Holiday> holidayList = holidayService.getAllHolidays(startYear, endYear);
 		
 		// Initialisiere Arbeitstage-XML
 		xmlService.initXml();
@@ -117,17 +108,13 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 				int localCountDays = 0;
 
 				// Festlegen von Anfangs- und Enddatum
-				Calendar startDate = 
-						new GregorianCalendar(currentYear, currentMonth, 1);
-				Calendar endDate =
-						new GregorianCalendar(currentYear, currentMonth,
-								startDate.getActualMaximum(Calendar.DAY_OF_MONTH));
+				Calendar startDate = new GregorianCalendar(currentYear, currentMonth, 1);
+				Calendar endDate = new GregorianCalendar(currentYear, currentMonth, startDate.getActualMaximum(Calendar.DAY_OF_MONTH));
 				
 				// Iteriere über Zeitraum von aktuellem Monat
 				while (!startDate.after(endDate)) {
 					// Liegt aktuelles Datum auf dem Wochenende?
-					if (!(startDate.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
-							|| startDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
+					if (!(startDate.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || startDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
 
 						// Flag zum Überprüfen, ob es ein Feiertag ist
 						boolean isHoliday = false;
@@ -153,8 +140,7 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 				}
 				
 				// Füge errechneten Wert der Arbeitstage des Monats hinzu
-				xmlService.addContentToNode("numberOfWorkingDays",
-						localCountDays);
+				xmlService.addContentToNode("numberOfWorkingDays", localCountDays);
 				xmlService.addEndTag("month");
 			}
 			
@@ -176,10 +162,7 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 	 */
 	public String calculateWorkingDays(Calendar startDate, Calendar endDate) {
 		// Hole Feiertage für kompletten Zeitraum
-		List<Holiday> holidayList =
-				holidayService.getAllHolidays(
-						startDate.get(Calendar.YEAR),
-						endDate.get(Calendar.YEAR));
+		List<Holiday> holidayList = holidayService.getAllHolidays(startDate.get(Calendar.YEAR), endDate.get(Calendar.YEAR));
 		
 		Calendar currentDate = (Calendar)startDate.clone();
 		
@@ -214,19 +197,14 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 				// Erstelle Datumsangaben für den jeweiligen Monat mit
 				// ausgeschriebenem Monatsnamen
 				SimpleDateFormat sdf = new SimpleDateFormat("d. MMMM yyyy");
-				String durationStart =
-						sdf.format(startDateCurrentMonth.getTime());
-				String durationEnd =
-						sdf.format(endDateCurrentMonth.getTime());
+				String durationStart = sdf.format(startDateCurrentMonth.getTime());
+				String durationEnd = sdf.format(endDateCurrentMonth.getTime());
 				
 				// Schreibe Angaben zum jeweiligen Monat in die XML
 				xmlService.addStartTag("month");
-				xmlService.addContentToNode(
-						"durationStart", durationStart);
-				xmlService.addContentToNode(
-						"durationEnd", durationEnd);
-				xmlService.addContentToNode(
-						"workingDays", localCountWorkingDays);
+				xmlService.addContentToNode("durationStart", durationStart);
+				xmlService.addContentToNode("durationEnd", durationEnd);
+				xmlService.addContentToNode("workingDays", localCountWorkingDays);
 				xmlService.addEndTag("month");
 				
 				// Setze Zähler zurück
@@ -259,24 +237,18 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 						currentDate.get(Calendar.YEAR),
 						currentDate.get(Calendar.MONTH),
 						currentDate.getActualMinimum(Calendar.DAY_OF_MONTH));
-				Calendar endDateCurrentMonth = currentDate;
-				
+
 				// Erstelle Datumsangaben für den letzten Monat mit
 				// ausgeschriebenem Monatsnamen
 				SimpleDateFormat sdf = new SimpleDateFormat("d. MMMM yyyy");
-				String durationStart =
-						sdf.format(startDateCurrentMonth.getTime());
-				String durationEnd =
-						sdf.format(endDateCurrentMonth.getTime());
+				String durationStart = sdf.format(startDateCurrentMonth.getTime());
+				String durationEnd = sdf.format(currentDate.getTime());
 				
 				// Schreibe Angaben zum letzten Monat in die XML
 				xmlService.addStartTag("month");
-				xmlService.addContentToNode(
-						"durationStart", durationStart);
-				xmlService.addContentToNode(
-						"durationEnd", durationEnd);
-				xmlService.addContentToNode(
-						"workingDays", localCountWorkingDays);
+				xmlService.addContentToNode("durationStart", durationStart);
+				xmlService.addContentToNode("durationEnd", durationEnd);
+				xmlService.addContentToNode("workingDays", localCountWorkingDays);
 				xmlService.addEndTag("month");
 			}
 			

@@ -1,20 +1,19 @@
 package de.sgirke.neuearbeit.utils;
 
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.fop.apps.MimeConstants;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
- * Utility-Klasse zum Senden von PDF-Dateien an den Browser, sodass diese dem
- * Benutzer zum Einsehen oder ggf. zum Herunterladen zur Verfügung gestellt
- * werden können.
+ * Utility-Klasse zum Senden von PDF-Dateien an den Browser, sodass diese dem Benutzer zum Einsehen oder ggf. zum
+ * Herunterladen zur Verfügung gestellt werden können.
  * @author Sebastian Girke
  */
 public class JsfUtils {
@@ -23,9 +22,8 @@ public class JsfUtils {
 	private static final Log LOG = LogFactory.getLog(JsfUtils.class);
 	
 	/**
-	 * Methode zum Versenden einer Datei an den Browser, sodass diese dem
-	 * Benutzer zum Einsehen oder ggf. zum Herunterladen zur Verfügung gestellt
-	 * werden kann.
+	 * Methode zum Versenden einer Datei an den Browser, sodass diese dem Benutzer zum Einsehen oder ggf. zum
+	 * Herunterladen zur Verfügung gestellt werden kann.
 	 * @param pdfOutStream PDF-Dokument als Datei-Stream
 	 * @param fileName Name der Datei
 	 */
@@ -54,8 +52,7 @@ public class JsfUtils {
 		} finally {
 			if (outStream != null) {
 				try {
-					// Schließe den Stream zum Browser, sofern dieser zuvor
-					// erfolgreich initialisiert wurde
+					// Schließe den Stream zum Browser, sofern dieser zuvor erfolgreich initialisiert wurde
 					outStream.close();
 				} catch (IOException ioe) {
 					if (LOG.isErrorEnabled()) {
@@ -67,5 +64,4 @@ public class JsfUtils {
 		
 		facesContext.responseComplete();
 	}
-	
 }

@@ -11,9 +11,8 @@ import org.apache.commons.logging.LogFactory;
 import de.sgirke.neuearbeit.model.Holiday;
 
 /**
- * Service-Implementierung zum Berechnen der gesetzlichen Feiertage in
- * Thüringen und Erstellen einer Liste mit {@link Holiday}-Objekten zur
- * weiteren Verwendung innerhalb der Applikation
+ * Service-Implementierung zum Berechnen der gesetzlichen Feiertage in Thüringen und Erstellen einer Liste mit
+ * {@link Holiday}-Objekten zur weiteren Verwendung innerhalb der Applikation
  * @author Sebastian Girke
  */
 public class HolidayServiceImpl implements HolidayService {
@@ -21,10 +20,7 @@ public class HolidayServiceImpl implements HolidayService {
 	/** Logger-Objekt */
 	private static final Log LOG = LogFactory.getLog(HolidayServiceImpl.class);
 
-	/**
-	 * Liste mit {@link Holiday}-Objekten, die alle gesetzlichen Feiertage in
-	 * Thüringen enthält
-	 */
+	/** Liste mit {@link Holiday}-Objekten, die alle gesetzlichen Feiertage in Thüringen enthält */
 	private List<Holiday> holidayList;
 	
 	/*
@@ -38,43 +34,29 @@ public class HolidayServiceImpl implements HolidayService {
 		for (int year = startYear; year <= endYear; year++) {
 			
 			// Füge feste Feiertage hinzu
-			holidayList.add(new Holiday("Neujahrstag",
-					new GregorianCalendar(year, 0, 1)));
-			holidayList.add(new Holiday("Maifeiertag",
-					new GregorianCalendar(year, 4, 1)));
-			holidayList.add(new Holiday("Tag der Deutschen Einheit",
-					new GregorianCalendar(year, 9, 3)));
-			holidayList.add(new Holiday("Reformationstag",
-					new GregorianCalendar(year, 9, 31)));
-			holidayList.add(new Holiday("Erster Weihnachtsfeiertag",
-					new GregorianCalendar(year, 11, 25)));
-			holidayList.add(new Holiday("Zweiter Weihnachtsfeiertag",
-					new GregorianCalendar(year, 11, 26)));
+			holidayList.add(new Holiday("Neujahrstag", new GregorianCalendar(year, Calendar.JANUARY, 1)));
+			holidayList.add(new Holiday("Maifeiertag", new GregorianCalendar(year, Calendar.MAY, 1)));
+			holidayList.add(new Holiday("Tag der Deutschen Einheit", new GregorianCalendar(year, Calendar.OCTOBER, 3)));
+			holidayList.add(new Holiday("Reformationstag", new GregorianCalendar(year, Calendar.OCTOBER, 31)));
+			holidayList.add(new Holiday("Erster Weihnachtsfeiertag", new GregorianCalendar(year, Calendar.DECEMBER, 25)));
+			holidayList.add(new Holiday("Zweiter Weihnachtsfeiertag", new GregorianCalendar(year, Calendar.DECEMBER, 26)));
 			
 			// Füge bewegliche Feiertage (abhängig von Ostersonntag) hinzu
-			holidayList.add(new Holiday("Karfreitag",
-					getGoodFriday(year)));
-			holidayList.add(new Holiday("Ostermontag",
-					getEasterMonday(year)));
-			holidayList.add(new Holiday("Christi Himmelfahrt",
-					getAscensionDay(year)));
-			holidayList.add(new Holiday("Pfingstmontag",
-					getWhitMonday(year)));
+			holidayList.add(new Holiday("Karfreitag", getGoodFriday(year)));
+			holidayList.add(new Holiday("Ostermontag", getEasterMonday(year)));
+			holidayList.add(new Holiday("Christi Himmelfahrt", getAscensionDay(year)));
+			holidayList.add(new Holiday("Pfingstmontag", getWhitMonday(year)));
 			
 			/*
-			 * Füge Heiligabend und Silvester separat hinzu (keine gesetzlichen
-			 * Feiertage, aber zählen in der "Neuen Arbeit Neustadt (Orla) e.V."
-			 * wie gesetzliche Feiertage
+			 * Füge Heiligabend und Silvester separat hinzu (keine gesetzlichen Feiertage, aber zählen in der
+			 * "Neuen Arbeit Neustadt (Orla) e.V." wie gesetzliche Feiertage
 			 */
-			holidayList.add(new Holiday("Heiligabend",
-					new GregorianCalendar(year, 11, 24)));
-			holidayList.add(new Holiday("Silvester",
-					new GregorianCalendar(year, 11, 31)));
+			holidayList.add(new Holiday("Heiligabend", new GregorianCalendar(year, Calendar.DECEMBER, 24)));
+			holidayList.add(new Holiday("Silvester", new GregorianCalendar(year, Calendar.DECEMBER, 31)));
 			
 			if (LOG.isDebugEnabled()) {
-				LOG.debug("Liste mit allen Feiertagen in Thüringen erstellt ("
-						+ "startYear='" + startYear + "'; endYear='" + endYear
-						+ "'; holidayList.size='" + holidayList.size() + "')");
+				LOG.debug("Liste mit allen Feiertagen in Thüringen erstellt (startYear='" + startYear + "'; " +
+						"endYear='" + endYear + "'; holidayList.size='" + holidayList.size() + "')");
 			}
 		}
 		
@@ -147,13 +129,12 @@ public class HolidayServiceImpl implements HolidayService {
 		
 		if (easterNumber < 32) {
 			// Ostersonntag liegt im März
-			easterSunday = new GregorianCalendar(year, 2, easterNumber);
+			easterSunday = new GregorianCalendar(year, Calendar.MARCH, easterNumber);
 		} else {
 			// Ostersonntag liegt im April
-			easterSunday = new GregorianCalendar(year, 3, easterNumber - 31);
+			easterSunday = new GregorianCalendar(year, Calendar.APRIL, easterNumber - 31);
 		}
 		
 		return easterSunday;
 	}
-	
 }

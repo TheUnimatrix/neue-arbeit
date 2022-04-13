@@ -8,19 +8,14 @@ import java.util.Calendar;
  */
 public class Holiday {
 	
-	/**
-	 * Name des Feiertags
-	 */
+	/** Name des Feiertags */
 	private String name;
 	
-	/**
-	 * Datum des Feiertags als {@link Calendar}-Objekt
-	 */
+	/** Datum des Feiertags als {@link Calendar}-Objekt */
 	private Calendar date;
 	
 	/**
-	 * Konstruktor zum Erstellen einer {@link Holiday}-Instanz, der den Namen
-	 * und das Datum des Feiertags entgegennimmt.
+	 * Konstruktor zum Erstellen einer {@link Holiday}-Instanz, der den Namen und das Datum des Feiertags entgegennimmt.
 	 * @param name Name des Feiertags
 	 * @param date Datum des Feiertags
 	 */

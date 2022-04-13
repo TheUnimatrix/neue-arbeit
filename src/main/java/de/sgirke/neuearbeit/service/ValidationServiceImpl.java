@@ -13,9 +13,8 @@ import org.apache.commons.logging.LogFactory;
 import de.sgirke.neuearbeit.model.Holiday;
 
 /**
- * Service-Implementierung zum Validieren benutzerspezifischer Eingaben mit
- * Methoden zum Überprüfen von Jahresangaben sowie von eingegebenen
- * Datumsangaben.
+ * Service-Implementierung zum Validieren benutzerspezifischer Eingaben mit Methoden zum Überprüfen von Jahresangaben
+ * sowie von eingegebenen Datumsangaben.
  * @author Sebastian Girke
  */
 public class ValidationServiceImpl implements ValidationService {
@@ -24,10 +23,7 @@ public class ValidationServiceImpl implements ValidationService {
 	private static final Log LOG =
 			LogFactory.getLog(ValidationServiceImpl.class);
 	
-	/**
-	 * Service-Objekt zum Holen aller gesetzlichen Feiertage in Thüringen in
-	 * Listenform
-	 */
+	/** Service-Objekt zum Holen aller gesetzlichen Feiertage in Thüringen in Listenform */
 	private HolidayService holidayService;
 
 	/*
@@ -56,8 +52,7 @@ public class ValidationServiceImpl implements ValidationService {
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Anfangsjahr liegt nach dem Endjahr");
 			}
-			errorList.add("Das ausgewählte Anfangsjahr liegt nach dem "
-					+ "ausgewählten Endjahr.");
+			errorList.add("Das ausgewählte Anfangsjahr liegt nach dem ausgewählten Endjahr.");
 		}
 	}
 	
@@ -65,8 +60,7 @@ public class ValidationServiceImpl implements ValidationService {
 	 * (non-Javadoc)
 	 * @see de.sgirke.neuearbeit.service.ValidationService#validateDates(java.lang.String, java.lang.String, java.util.List)
 	 */
-	public void validateDates(String startDateString, String endDateString,
-			List<String> errorList) {
+	public void validateDates(String startDateString, String endDateString, List<String> errorList) {
 		// Parse die eingegebenen Daten in das Format "TT.MM.JJJJ"
 		Date startDate = parseDate(startDateString, "Anfangsdatum", errorList);
 		Date endDate = parseDate(endDateString, "Enddatum", errorList);
@@ -86,8 +80,7 @@ public class ValidationServiceImpl implements ValidationService {
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Anfangsdatum liegt nach Enddatum");
 			}
-			errorList.add("Das eingegebene Anfangsdatum liegt nach dem "
-					+ "eingegebenen Enddatum.");
+			errorList.add("Das eingegebene Anfangsdatum liegt nach dem eingegebenen Enddatum.");
 		}
 	}
 	
@@ -108,16 +101,12 @@ public class ValidationServiceImpl implements ValidationService {
 	}
 	
 	/**
-	 * Methode zum Überprüfen und Parsen eines Datums aus einem String in ein
-	 * gültiges {@link Date}-Objekt. Dabei wird vorher überprüft, ob ein Datum
-	 * eingegeben wurde und ggf. passende Fehlermeldungen erstellt.
+	 * Methode zum Überprüfen und Parsen eines Datums aus einem String in ein gültiges {@link Date}-Objekt.
+	 * Dabei wird vorher überprüft, ob ein Datum eingegeben wurde und ggf. passende Fehlermeldungen erstellt.
 	 * @param date zu überprüfendes Datum
 	 * @param dateDesc Bezeichnung des Datums (Anfangs- oder Enddatum)
-	 * @param errorList Liste mit Fehlermeldungen, die beim Überprüfen des
-	 * 		Datums auftreten können
-	 * @return das eingegebene Datum als entsprechendes {@link Date}-Objekt bzw.
-	 * 		<code>null</code>, falls bei der Überprüfung ein Fehler aufgetreten
-	 * 		ist
+	 * @param errorList Liste mit Fehlermeldungen, die beim Überprüfen des Datums auftreten können
+	 * @return das eingegebene Datum als entsprechendes {@link Date}-Objekt bzw. <code>null</code>, falls bei der Überprüfung ein Fehler aufgetreten ist
 	 */
 	private Date parseDate(String date, String dateDesc, List<String> errorList) {
 		// Erlaube keine ungültigen Angaben (z.B. "30.02.2013")
@@ -142,8 +131,7 @@ public class ValidationServiceImpl implements ValidationService {
 					LOG.debug(pe.getMessage(), pe);
 					LOG.debug("Ungültiges " + dateDesc + " eingegeben");
 				}
-				errorList.add("Es wurde kein gültiges " + dateDesc + " im "
-						+ "Format \"TT.MM.JJJJ\" eingegeben.");
+				errorList.add("Es wurde kein gültiges " + dateDesc + " im Format \"TT.MM.JJJJ\" eingegeben.");
 				parsedDate = null;
 			}
 		}
@@ -151,14 +139,12 @@ public class ValidationServiceImpl implements ValidationService {
 	}
 	
 	/**
-	 * Methode zum Validieren eines {@link Date}-Objekts. Dabei wird überprüft,
-	 * ob das zu überprüfende Datum auf einem Wochenend- oder Feiertag liegt,
-	 * wobei es sich bei dem Feiertag um einen gesetzlichen Feiertag in
+	 * Methode zum Validieren eines {@link Date}-Objekts. Dabei wird überprüft, ob das zu überprüfende Datum auf
+	 * einem Wochenend- oder Feiertag liegt, wobei es sich bei dem Feiertag um einen gesetzlichen Feiertag in
 	 * Thüringen handelt.
 	 * @param date das zu überprüfende Datum
 	 * @param dateDesc Bezeichnung des Datums (Anfangs- oder Enddatum)
-	 * @param errorList Liste mit Fehlermeldungen, die beim Überprüfen des
-	 * 		Datums auftreten können
+	 * @param errorList Liste mit Fehlermeldungen, die beim Überprüfen des Datums auftreten können
 	 */
 	private void validateDate(Date date, String dateDesc, List<String> errorList) {
 		// Wandle Datum in Calendar-Objekt um
@@ -173,11 +159,9 @@ public class ValidationServiceImpl implements ValidationService {
 			String dayOfWeekName =
 					dayOfWeek == Calendar.SATURDAY ? "Samstag" : "Sonntag";
 			if (LOG.isDebugEnabled()) {
-				LOG.debug(dateDesc + " liegt auf Wochenende ("
-						+ dayOfWeekName + ")");
+				LOG.debug(dateDesc + " liegt auf Wochenende (" + dayOfWeekName + ")");
 			}
-			errorList.add("Das eingegebene " + dateDesc + " liegt auf einem "
-					+ "Wochenendtag (" + dayOfWeekName + ").");
+			errorList.add("Das eingegebene " + dateDesc + " liegt auf einem Wochenendtag (" + dayOfWeekName + ").");
 		} else {
 			// Hole Liste mit allen Feiertagen aus dem Jahr des Datums
 			int year = dateCalendar.get(Calendar.YEAR);
@@ -191,12 +175,10 @@ public class ValidationServiceImpl implements ValidationService {
 						LOG.debug(dateDesc + " liegt auf Feiertag ("
 								+ holiday.getName() + ")");
 					}
-					errorList.add("Das eingegebene " + dateDesc + " liegt auf "
-							+ "einem Feiertag (" + holiday.getName() + ").");
+					errorList.add("Das eingegebene " + dateDesc + " liegt auf einem Feiertag (" + holiday.getName() + ").");
 					break;
 				}
 			}
 		}
 	}
-	
 }

@@ -4,11 +4,11 @@ import de.sgirke.neuearbeit.service.PdfService;
 import de.sgirke.neuearbeit.service.ValidationService;
 import de.sgirke.neuearbeit.service.WorkingDaysService;
 import de.sgirke.neuearbeit.utils.JsfUtils;
+import jakarta.faces.model.SelectItem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.fop.apps.FOPException;
 
-import javax.faces.model.SelectItem;
 import javax.xml.transform.TransformerException;
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
@@ -25,36 +25,29 @@ public class WorkingDaysBean {
 	/** Logger-Objekt */
 	private static final Log LOG = LogFactory.getLog(WorkingDaysBean.class);
 	
-	/**
-	 * Konstante für die RadioButtons für den Fall, dass der unbestimmte
-	 * Zeitraum in Jahren ausgewählt wurde
-	 */
+	/** Konstante für die RadioButtons für den Fall, dass der unbestimmte Zeitraum in Jahren ausgewählt wurde */
 	private static final String VALUE_SPACE_OF_TIME_YEARS =
 			"spaceOfTime_Years";
 	
-	/**
-	 * Konstante für die RadioButtons für den Fall, dass der spezifische
-	 * Zeitraum mit Datumsangaben ausgewählt wurde
-	 */
+	/** Konstante für die RadioButtons für den Fall, dass der spezifische Zeitraum mit Datumsangaben ausgewählt wurde */
 	private static final String VALUE_SPACE_OF_TIME_DATES =
 			"spaceOfTime_Dates";
 	
 	/**
-	 * Navigationsregel, die angibt, dass wieder auf die Seite dieses Moduls
-	 * weitergeleitet wird, wenn der Button "Generieren" geklickt wurde
+	 * Navigationsregel, die angibt, dass wieder auf die Seite dieses Moduls weitergeleitet wird, wenn der Button
+	 * "Generieren" geklickt wurde
 	 */
 	private static final String NAVIGATION_RULE_WORKING_DAYS = "workingDays";
 
 	/**
-	 * Liste mit sämtlichen Fehlermeldungen, die während der Validierung der
-	 * Eingaben oder dem Generieren des PDF-Dokuments auftreten können
+	 * Liste mit sämtlichen Fehlermeldungen, die während der Validierung der Eingaben oder dem Generieren
+	 * des PDF-Dokuments auftreten können
 	 */
 	private List<String> errorList;
 	
 	/**
-	 * Objekt zum Speichern des ausgewählten Zeitraums (entweder unbestimmter
-	 * Zeitraum oder spezifischer Zeitraum), standardmäßig ist "Unbestimmter
-	 * Zeitraum in Jahren" ausgewählt
+	 * Objekt zum Speichern des ausgewählten Zeitraums (entweder unbestimmter Zeitraum oder spezifischer Zeitraum),
+	 * standardmäßig ist "Unbestimmter Zeitraum in Jahren" ausgewählt
 	 */
 	private String spaceOfTimeSelection = VALUE_SPACE_OF_TIME_YEARS;
 	
@@ -89,14 +82,12 @@ public class WorkingDaysBean {
 	private ValidationService validationService;
 	
 	/**
-	 * Service-Objekt zum Berechnen der Arbeitstage für einen gewählten
-	 * Zeitraum
+	 * Service-Objekt zum Berechnen der Arbeitstage für einen gewählten Zeitraum
 	 */
 	private WorkingDaysService workingDaysService;
 	
 	/**
-	 * Getter-Methode für Liste mit allen Jahren vom aktuellen Jahr sowie der
-	 * nächsten 9 Jahre.
+	 * Getter-Methode für Liste mit allen Jahren vom aktuellen Jahr sowie der nächsten 9 Jahre.
 	 * @return Liste mit allen Jahren vom aktuellen Jahr sowie der nächsten 9 Jahre
 	 */
 	public List<SelectItem> getYearList() {
@@ -115,8 +106,7 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Getter-Methode für Liste mit den Auswahlmöglichkeiten, welcher Zeitraum
-	 * bei den Radio-Buttons ausgewählt werden soll.
+	 * Getter-Methode für Liste mit den Auswahlmöglichkeiten, welcher Zeitraum bei den Radio-Buttons ausgewählt werden soll.
 	 * @return Liste mit den Auswahlmöglichkeiten für die Radio-Buttons
 	 */
 	public List<SelectItem> getSpaceOfTimeList() {
@@ -129,8 +119,8 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Getter-Methode mit sämtlichen Fehlermeldungen, die während der
-	 * Verarbeitung der benutzerspezifischen Eingaben auftreten können.
+	 * Getter-Methode mit sämtlichen Fehlermeldungen, die während der Verarbeitung der benutzerspezifischen Eingaben
+	 * auftreten können.
 	 * @return Liste mit Fehlermeldungen
 	 */
 	public List<String> getErrorList() {
@@ -138,8 +128,7 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Setter-Methode für das auswählbare Anfangsjahr, sofern der unbestimmte
-	 * Zeitraum in Jahren ausgewählt wurde.
+	 * Setter-Methode für das auswählbare Anfangsjahr, sofern der unbestimmte Zeitraum in Jahren ausgewählt wurde.
 	 * @param startYear Anfangsjahr für unbestimmten Zeitraum
 	 */
 	public void setStartYear(Integer startYear) {
@@ -147,8 +136,7 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Getter-Methode für das auswählbare Anfangsjahr, sofern der unbestimmte
-	 * Zeitraum in Jahren ausgewählt wurde.
+	 * Getter-Methode für das auswählbare Anfangsjahr, sofern der unbestimmte Zeitraum in Jahren ausgewählt wurde.
 	 * @return Anfangsjahr für unbestimmten Zeitraum
 	 */
 	public Integer getStartYear() {
@@ -156,8 +144,7 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Setter-Methode für das auswählbare Endjahr, sofern der unbestimmte
-	 * Zeitraum in Jahren ausgewählt wurde.
+	 * Setter-Methode für das auswählbare Endjahr, sofern der unbestimmte Zeitraum in Jahren ausgewählt wurde.
 	 * @param endYear Endjahr für unbestimmten Zeitraum
 	 */
 	public void setEndYear(Integer endYear) {
@@ -165,8 +152,7 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Getter-Methode für das auswählbare Endjahr, sofern der unbestimmte
-	 * Zeitraum in Jahren ausgewählt wurde.
+	 * Getter-Methode für das auswählbare Endjahr, sofern der unbestimmte Zeitraum in Jahren ausgewählt wurde.
 	 * @return Endjahr für unbestimmten Zeitraum
 	 */
 	public Integer getEndYear() {
@@ -174,8 +160,7 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Setter-Methode für das Anfangsdatum, sofern der spezifische Zeitraum
-	 * ausgewählt wurde.
+	 * Setter-Methode für das Anfangsdatum, sofern der spezifische Zeitraum ausgewählt wurde.
 	 * @param startDate Anfangsdatum für spezifischen Zeitraum
 	 */
 	public void setStartDate(String startDate) {
@@ -183,8 +168,7 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Getter-Methode für das Anfangsdatum, sofern der spezifische Zeitraum
-	 * ausgewählt wurde.
+	 * Getter-Methode für das Anfangsdatum, sofern der spezifische Zeitraum ausgewählt wurde.
 	 * @return Anfangsdatum für spezifischen Zeitraum
 	 */
 	public String getStartDate() {
@@ -192,8 +176,7 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Setter-Methode für das Enddatum, sofern der spezifische Zeitraum
-	 * ausgewählt wurde.
+	 * Setter-Methode für das Enddatum, sofern der spezifische Zeitraum ausgewählt wurde.
 	 * @param endDate Enddatum für spezifischen Zeitraum
 	 */
 	public void setEndDate(String endDate) {
@@ -201,8 +184,7 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Getter-Methode für das Enddatum, sofern der spezifische Zeitraum
-	 * ausgewählt wurde.
+	 * Getter-Methode für das Enddatum, sofern der spezifische Zeitraum ausgewählt wurde.
 	 * @return Enddatum für spezifischen Zeitraum
 	 */
 	public String getEndDate() {
@@ -210,20 +192,18 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Setter-Methode für die Auswahl des vom Benutzer ausgewählten Zeitraums
-	 * (entweder unbestimmter Zeitraum oder spezifischer Zeitraum).
-	 * @param spaceOfTimeSelection Objekt zum Speichern der Auswahl des vom
-	 * 		Benutzer ausgewählten Zeitraums
+	 * Setter-Methode für die Auswahl des vom Benutzer ausgewählten Zeitraums (entweder unbestimmter Zeitraum
+	 * oder spezifischer Zeitraum).
+	 * @param spaceOfTimeSelection Objekt zum Speichern der Auswahl des vom Benutzer ausgewählten Zeitraums
 	 */
 	public void setSpaceOfTimeSelection(String spaceOfTimeSelection) {
 		this.spaceOfTimeSelection = spaceOfTimeSelection;
 	}
 	
 	/**
-	 * Getter-Methode für die Auswahl des vom Benutzer ausgewählten Zeitraums
-	 * (entweder unbestimmter Zeitraum oder spezifischer Zeitraum).
-	 * @return Objekt zum Speichern der Auswahl des vom Benutzer ausgewählten
-	 * 		Zeitraums
+	 * Getter-Methode für die Auswahl des vom Benutzer ausgewählten Zeitraums (entweder unbestimmter Zeitraum
+	 * oder spezifischer Zeitraum).
+	 * @return Objekt zum Speichern der Auswahl des vom Benutzer ausgewählten Zeitraums
 	 */
 	public String getSpaceOfTimeSelection() {
 		return spaceOfTimeSelection;
@@ -246,18 +226,15 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Setter-Methode für Service-Objekt zum Validieren der
-	 * benutzerspezifischen Eingaben.
-	 * @param validationService Service-Objekt zum Validieren der
-	 * 		benutzerspezifischen Eingaben
+	 * Setter-Methode für Service-Objekt zum Validieren der benutzerspezifischen Eingaben.
+	 * @param validationService Service-Objekt zum Validieren der benutzerspezifischen Eingaben
 	 */
 	public void setValidationService(ValidationService validationService) {
 		this.validationService = validationService;
 	}
 	
 	/**
-	 * Getter-Methode für Service-Objekt zum Validieren der
-	 * benutzerspezifischen Eingaben.
+	 * Getter-Methode für Service-Objekt zum Validieren der benutzerspezifischen Eingaben.
 	 * @return Service-Objekt zum Validieren der benutzerspezifischen Eingaben
 	 */
 	public ValidationService getValidationService() {
@@ -265,32 +242,27 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Setter-Methode für Service-Objekt zum Berechnen der Arbeitstage für
-	 * einen gewählten Zeitraum.
-	 * @param workingDaysService Service-Objekt zum Berechnen der Arbeitstage
-	 * 		für einen gewählten Zeitraum
+	 * Setter-Methode für Service-Objekt zum Berechnen der Arbeitstage für einen gewählten Zeitraum.
+	 * @param workingDaysService Service-Objekt zum Berechnen der Arbeitstage für einen gewählten Zeitraum
 	 */
 	public void setWorkingDaysService(WorkingDaysService workingDaysService) {
 		this.workingDaysService = workingDaysService;
 	}
 	
 	/**
-	 * Getter-Methode für Service-Objekt zum Berechnen der Arbeitstage für
-	 * einen gewählten Zeitraum.
-	 * @return Service-Objekt zum Berechnen der Arbeitstage für einen gewählten
-	 * 		Zeitraum
+	 * Getter-Methode für Service-Objekt zum Berechnen der Arbeitstage für einen gewählten Zeitraum.
+	 * @return Service-Objekt zum Berechnen der Arbeitstage für einen gewählten Zeitraum
 	 */
 	public WorkingDaysService getWorkingDaysService() {
 		return workingDaysService;
 	}
 	
 	/**
-	 * Methode zum Validieren der benutzerspezifischen Daten sowie Berechnen
-	 * der Arbeitstage und anschließendem Absenden eines PDF-Dokuments mit den
-	 * gewünschten Ergebnissen. Die Methode wird ausgeführt, wenn auf den
-	 * Button "Generieren" geklickt wurde.
-	 * @return Navigationsregel, die angibt, dass wieder auf die Seite dieses
-	 * 		Moduls weitergeleitet wird, wenn der Button geklickt wurde
+	 * Methode zum Validieren der benutzerspezifischen Daten sowie Berechnen der Arbeitstage und anschließendem
+	 * Absenden eines PDF-Dokuments mit den gewünschten Ergebnissen. Die Methode wird ausgeführt, wenn auf den Button
+	 * "Generieren" geklickt wurde.
+	 * @return Navigationsregel, die angibt, dass wieder auf die Seite dieses Moduls weitergeleitet wird, wenn
+	 * 		der Button geklickt wurde
 	 */
 	public String validateInput() {
 		errorList = new ArrayList<>();
@@ -308,9 +280,8 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Methode zum Validieren der benutzerspezifischen Daten sowie Berechnen
-	 * der Arbeitstage und anschließendem Absenden eines PDF-Dokuments mit den
-	 * gewünschten Ergebnissen, wenn der unbestimmte Zeitraum in Jahren vom
+	 * Methode zum Validieren der benutzerspezifischen Daten sowie Berechnen der Arbeitstage und anschließendem
+	 * Absenden eines PDF-Dokuments mit den gewünschten Ergebnissen, wenn der unbestimmte Zeitraum in Jahren vom
 	 * Benutzer ausgewählt wurde.
 	 */
 	private void sendPdfSpaceOfTimeYears() {
@@ -350,9 +321,8 @@ public class WorkingDaysBean {
 	}
 	
 	/**
-	 * Methode zum Validieren der benutzerspezifischen Daten sowie Berechnen
-	 * der Arbeitstage und anschließendem Absenden eines PDF-Dokuments mit den
-	 * gewünschten Ergebnissen, wenn der spezifische Zeitraum mit Datumsangaben
+	 * Methode zum Validieren der benutzerspezifischen Daten sowie Berechnen der Arbeitstage und anschließendem
+	 * Absenden eines PDF-Dokuments mit den gewünschten Ergebnissen, wenn der spezifische Zeitraum mit Datumsangaben
 	 * vom Benutzer ausgewählt wurde.
 	 */
 	private void sendPdfSpaceOfTimeDates() {
@@ -403,5 +373,4 @@ public class WorkingDaysBean {
 			}
 		}
 	}
-	
 }

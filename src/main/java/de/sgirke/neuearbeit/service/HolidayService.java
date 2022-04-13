@@ -6,15 +6,14 @@ import java.util.List;
 import de.sgirke.neuearbeit.model.Holiday;
 
 /**
- * Service-Klasse zum Berechnen der beweglichen Feiertage sowie zum Anfordern
- * der gesetzlichen Feiertage in Listenform für ein gewähltes Jahr
+ * Service-Klasse zum Berechnen der beweglichen Feiertage sowie zum Anfordern der gesetzlichen Feiertage in Listenform
+ * für ein gewähltes Jahr
  * @author Sebastian Girke
  */
 public interface HolidayService {
 	
 	/**
-	 * Getter-Methode zum Holen aller gesetzlichen Feiertage in Thüringen aus
-	 * einem benutzerspezifischen Zeitraum.
+	 * Getter-Methode zum Holen aller gesetzlichen Feiertage in Thüringen aus einem benutzerspezifischen Zeitraum.
 	 * @param startYear Anfangsjahr des gewählten Zeitraums
 	 * @param endYear Endjahr des gewählten Zeitraums
 	 * @return Liste mit allen gesetzlichen Feiertagen in Thüringen
@@ -50,8 +49,7 @@ public interface HolidayService {
 	public Calendar getWhitMonday(int year);
 	
 	/**
-	 * Getter-Methode zum Berechnen von Ostersonntag nach der Gaußschen
-	 * Osterformel.
+	 * Getter-Methode zum Berechnen von Ostersonntag nach der Gaußschen Osterformel.
 	 * @param year ausgewähltes Jahr zur Berechnung von Ostersonntag
 	 * @return {@link Calendar}-Objekt mit den Daten zu Ostersonntag
 	 */

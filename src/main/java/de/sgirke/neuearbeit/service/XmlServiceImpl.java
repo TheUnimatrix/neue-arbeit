@@ -4,10 +4,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Service-Implementierung zum Generieren von XML-Dateien als
- * String-Repräsentation. Dafür werden Methoden zur Verfügung gestellt, mit
- * denen einzelne Knoten sowie entsprechende Inhalte an die Knoten angehängt
- * werden können. 
+ * Service-Implementierung zum Generieren von XML-Dateien als String-Repräsentation. Dafür werden Methoden zur
+ * Verfügung gestellt, mit denen einzelne Knoten sowie entsprechende Inhalte an die Knoten angehängt werden können.
  * @author Sebastian Girke
  */
 public class XmlServiceImpl implements XmlService {
@@ -15,10 +13,7 @@ public class XmlServiceImpl implements XmlService {
 	/** Logger-Objekt */
 	private static final Log LOG = LogFactory.getLog(XmlServiceImpl.class);
 	
-	/**
-	 * StringBuffer-Objekt zum Speichern der XML-Daten als
-	 * String-Repräsentation
-	 */
+	/** StringBuffer-Objekt zum Speichern der XML-Daten als String-Repräsentation */
 	private StringBuffer xmlBuffer;
 	
 	/*
@@ -26,7 +21,7 @@ public class XmlServiceImpl implements XmlService {
 	 * @see de.sgirke.neuearbeit.service.XmlService#addStartTag(java.lang.String)
 	 */
 	public void addStartTag(String tagName) {
-		xmlBuffer.append("<" + tagName + ">");
+		xmlBuffer.append("<").append(tagName).append(">");
 	}
 	
 	/*
@@ -34,7 +29,7 @@ public class XmlServiceImpl implements XmlService {
 	 * @see de.sgirke.neuearbeit.service.XmlService#addEndTag(java.lang.String)
 	 */
 	public void addEndTag(String tagName) {
-		xmlBuffer.append("</" + tagName + ">");
+		xmlBuffer.append("</").append(tagName).append(">");
 	}
 	
 	/*
@@ -83,11 +78,7 @@ public class XmlServiceImpl implements XmlService {
 	 * @see de.sgirke.neuearbeit.service.XmlService#getXML()
 	 */
 	public String getXML() {
-		if (xmlBuffer != null) {
-			return xmlBuffer.toString();
-		} else {
-			return null;
-		}
+		return xmlBuffer == null ? null : xmlBuffer.toString();
 	}
 	
 }
