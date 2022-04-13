@@ -1,39 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-	http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="
+	   	http://www.springframework.org/schema/beans
+	   	http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean id="pdfService" class="de.sgirke.neuearbeit.service.PdfServiceImpl">
-		<description>
-			Service-Klasse zum Generieren von PDF-Dokumenten
-		</description>
+		<description>Service-Klasse zum Generieren von PDF-Dokumenten</description>
 	</bean>
 	
 	<bean id="holidayService" class="de.sgirke.neuearbeit.service.HolidayServiceImpl">
-		<description>
-			Service-Klasse zum Holen aller gesetzlichen Feiertage in Thüringen
-		</description>
+		<description>Service-Klasse zum Holen aller gesetzlichen Feiertage in Thüringen</description>
 	</bean>
 	
 	<bean id="xmlService" class="de.sgirke.neuearbeit.service.XmlServiceImpl">
-		<description>
-			Service-Klasse zum Erstellen einer XML als String-Repräsentation
-		</description>
+		<description>Service-Klasse zum Erstellen einer XML als String-Repräsentation</description>
 	</bean>
 	
 	<bean id="validationService" class="de.sgirke.neuearbeit.service.ValidationServiceImpl">
-		<description>
-			Service-Klasse zum Validieren der Benutzereingaben aus der View
-		</description>
+		<description>Service-Klasse zum Validieren der Benutzereingaben aus der View</description>
 		<property name="holidayService" ref="holidayService"/>
 	</bean>
 	
 	<bean id="workingDaysService" class="de.sgirke.neuearbeit.service.WorkingDaysServiceImpl">
-		<description>
-			Service-Klasse zum Berechnen der Arbeitstage im gewählten Zeitraum
-		</description>
+		<description>Service-Klasse zum Berechnen der Arbeitstage im gewählten Zeitraum</description>
 		<property name="holidayService" ref="holidayService"/>
 		<property name="xmlService" ref="xmlService"/>
 	</bean>
