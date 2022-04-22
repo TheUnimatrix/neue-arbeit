@@ -11,6 +11,10 @@
     <error-code>404</error-code>
     <location>/view/errors/error404.jsf</location>
   </error-page>
+  <error-page>
+    <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
+    <location>/view/errors/sessionExpired.jsf</location>
+  </error-page>
 
   <context-param>
     <param-name>contextConfigLocation</param-name>
