@@ -3,111 +3,54 @@
 body {
 	cursor: default;
 	background-color: #e5ecff;
-	text-align: justify;
 }
 
-#header {
-	font-family: Century Gothic, sans-serif;
-	font-size: 1rem;
-	text-align: left;
-	text-transform: uppercase;
-	background-color: #fff;
-	color: #3366ff;
-	border: solid #3366ff 2px;
-	width: auto;
-	height: 87px;
-	line-height: 87px;
-	vertical-align: middle;
-}
+/*#pageContent {*/
+/*	left: 150px;*/
+/*	width: auto;*/
+/*}*/
 
-#navigation {
-	width: 120px;
-}
+/*#navigation,*/
+/*#pageContent {*/
+/*	position: absolute;*/
+/*}*/
 
-#navigation ul {
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
-	list-style-type: none;
-}
+/*#header,*/
+/*#navigation,*/
+/*#pageContent {*/
+/*	padding: 10px;*/
+/*}*/
 
-#navigation ul li {
-	padding: 0 0 5px 0;
-}
-
-#pageContent {
-	left: 150px;
-	width: auto;
-}
-
-#navigation,
-#pageContent {
-	position: absolute;
-}
-
-#header,
-#navigation,
-#pageContent {
-	padding: 10px;
-}
-
-h1 {
-	font-size: 14pt;
-	text-decoration: underline;
-	margin: 0 0 10px 0;
-}
-
-h2 {
-	font-size: 12pt;
-	text-decoration: none;
-	margin: 20px 0 10px 0;
-}
-
-select {
-	width: 60px;
-	height: 20px;
-	vertical-align: middle;
-}
-
-label {
-	cursor: pointer;
-}
+/*select {*/
+/*	width: 60px;*/
+/*	height: 20px;*/
+/*	vertical-align: middle;*/
+/*}*/
 
 ul.errorList {
 	font-weight: bold;
 	color: red;
 }
 
-a.navigation {
-	font-weight: bold;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: #000;
-}
+/*input[type=submit] {*/
+/*	border: solid black 1px;*/
+/*	font-family: Courier New, sans-serif;*/
+/*	background-color: #d5d5d5;*/
+/*	cursor: pointer;*/
+/*}*/
 
-a.navigation:hover {
-	padding: 0 0 0 10px;
-	color: #3366ff;
-}
+/*input[type=radio] {*/
+/*	margin: 0 0 0 0;*/
+/*	vertical-align: middle;*/
+/*}*/
 
-input[type=submit] {
-	border: solid black 1px;
-	font-family: Courier New, sans-serif;
-	background-color: #d5d5d5;
-	cursor: pointer;
-}
+/*input[type=text] {*/
+/*	height: 14px;*/
+/*}*/
 
-input[type=radio] {
-	margin: 0 0 0 0;
-	vertical-align: middle;
-}
-
-input[type=text] {
-	height: 14px;
-}
-
-input[type=text].inputTextDefinedMedium {
-	width: 70px;
-}
+/*input[type=text].inputTextDefinedMedium {*/
+/*	width: 70px;*/
+/*}*/
 
 div.smallDistance,
 div.mediumDistance,
