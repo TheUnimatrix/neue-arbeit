@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="/WEB-INF/templates/pageTemplate.xhtml">
+	<ui:define name="pageContent">
+		<h4>#{commonRsc.start_headline}</h4>
+		<p>#{commonRsc.start_content}</p>
 
-	<ui:composition template="/WEB-INF/templates/pageTemplate.xhtml">
-		<ui:define name="pageContent">
-		    <h1>#{commonRsc.start_headline}</h1>
-		    <p>#{commonRsc.start_content}</p>
-		    
-		    <h2>#{commonRsc.start_module01_headline}</h2>
-		    <p>#{commonRsc.start_module01_content}</p>
-		</ui:define>
-	</ui:composition>
-</html>
+		<h5>#{commonRsc.start_module01_headline}</h5>
+		<p>#{commonRsc.start_module01_content}</p>
+	</ui:define>
+</ui:composition>
