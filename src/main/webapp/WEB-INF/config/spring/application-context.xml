@@ -5,24 +5,24 @@
 	   	http://www.springframework.org/schema/beans
 	   	http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="pdfService" class="de.sgirke.neuearbeit.service.PdfServiceImpl">
+	<bean id="pdfService" class="de.sgirke.neuearbeit.service.impl.PdfServiceImpl">
 		<description>Service-Klasse zum Generieren von PDF-Dokumenten</description>
 	</bean>
 	
-	<bean id="holidayService" class="de.sgirke.neuearbeit.service.HolidayServiceImpl">
+	<bean id="holidayService" class="de.sgirke.neuearbeit.service.impl.HolidayServiceImpl">
 		<description>Service-Klasse zum Holen aller gesetzlichen Feiertage in Thüringen</description>
 	</bean>
 	
-	<bean id="xmlService" class="de.sgirke.neuearbeit.service.XmlServiceImpl">
+	<bean id="xmlService" class="de.sgirke.neuearbeit.service.impl.XmlServiceImpl">
 		<description>Service-Klasse zum Erstellen einer XML als String-Repräsentation</description>
 	</bean>
 	
-	<bean id="validationService" class="de.sgirke.neuearbeit.service.ValidationServiceImpl">
+	<bean id="validationService" class="de.sgirke.neuearbeit.service.impl.ValidationServiceImpl">
 		<description>Service-Klasse zum Validieren der Benutzereingaben aus der View</description>
 		<property name="holidayService" ref="holidayService"/>
 	</bean>
 	
-	<bean id="workingDaysService" class="de.sgirke.neuearbeit.service.WorkingDaysServiceImpl">
+	<bean id="workingDaysService" class="de.sgirke.neuearbeit.service.impl.WorkingDaysServiceImpl">
 		<description>Service-Klasse zum Berechnen der Arbeitstage im gewählten Zeitraum</description>
 		<property name="holidayService" ref="holidayService"/>
 		<property name="xmlService" ref="xmlService"/>

@@ -1,5 +1,6 @@
-package de.sgirke.neuearbeit.service;
+package de.sgirke.neuearbeit.service.impl;
 
+import de.sgirke.neuearbeit.service.PdfService;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import org.apache.commons.logging.Log;

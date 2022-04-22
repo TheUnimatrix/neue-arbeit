@@ -1,4 +1,4 @@
-package de.sgirke.neuearbeit.service;
+package de.sgirke.neuearbeit.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -6,6 +6,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import de.sgirke.neuearbeit.service.HolidayService;
+import de.sgirke.neuearbeit.service.WorkingDaysService;
+import de.sgirke.neuearbeit.service.XmlService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
