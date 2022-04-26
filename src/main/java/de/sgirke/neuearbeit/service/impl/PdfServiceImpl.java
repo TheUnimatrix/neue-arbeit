@@ -1,8 +1,6 @@
 package de.sgirke.neuearbeit.service.impl;
 
 import de.sgirke.neuearbeit.service.PdfService;
-import jakarta.faces.context.ExternalContext;
-import jakarta.faces.context.FacesContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.fop.apps.FOPException;
@@ -10,6 +8,8 @@ import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.xml.transform.*;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;

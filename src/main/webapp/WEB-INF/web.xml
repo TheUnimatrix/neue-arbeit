@@ -5,14 +5,14 @@
           https://jakarta.ee/xml/ns/jakartaee
           https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" version="5.0">
 
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>Intranet-Applikation der "Neuen Arbeit Neustadt (Orla) e.V."</display-name>
 
   <error-page>
     <error-code>404</error-code>
     <location>/view/errors/error404.jsf</location>
   </error-page>
   <error-page>
-    <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
+    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
     <location>/view/errors/sessionExpired.jsf</location>
   </error-page>
 
@@ -20,25 +20,43 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>/WEB-INF/config/spring/application-context.xml</param-value>
   </context-param>
-  <context-param>
-    <param-name>jakarta.faces.CONFIG_FILES</param-name>
+  <context-param><!-- JSF-spezifische ContextParameter -->
+    <param-name>javax.faces.CONFIG_FILES</param-name>
     <param-value>/WEB-INF/config/jsf/faces-config.xml</param-value>
     <description>Pfad zur Konfigurationsdatei von JSF</description>
+  </context-param>
+  <context-param>
+    <description>Parameter zum Setzen des aktuellen Projekt-Status</description>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value><!-- (Development|Production) -->
+  </context-param>
+  <context-param>
+    <description>Speichermethode (Server oder Client?)</description>
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>server</param-value>
+  </context-param>
+  <context-param><!-- Allgemeine ContextParameter -->
+    <description>XSL-Datei für Arbeitstage-PDF-Dokument (Unbestimmter Zeitraum)</description>
+    <param-name>de.sgirke.neuearbeit.XSL_YEARS_PDF_FILE</param-name>
+    <param-value>WEB-INF/config/xslt/workingDays_Years.pdf.xsl</param-value>
+  </context-param>
+  <context-param>
+    <description>XSL-Datei für Arbeitstage-PDF-Dokument (Spezifischer Zeitraum)</description>
+    <param-name>de.sgirke.neuearbeit.XSL_DATES_PDF_FILE</param-name>
+    <param-value>WEB-INF/config/xslt/workingDays_Dates.pdf.xsl</param-value>
   </context-param>
 
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-<!--  <listener>-->
-<!--    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>-->
-<!--  </listener>-->
 
   <servlet>
     <servlet-name>faces-servlet</servlet-name>
-    <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>faces-servlet</servlet-name>
     <url-pattern>*.jsf</url-pattern>
+<!--    <url-pattern>/jakarta.faces.resource/*</url-pattern>-->
   </servlet-mapping>
 </web-app>

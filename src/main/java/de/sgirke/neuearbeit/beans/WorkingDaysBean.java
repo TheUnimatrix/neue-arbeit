@@ -4,11 +4,12 @@ import de.sgirke.neuearbeit.service.PdfService;
 import de.sgirke.neuearbeit.service.ValidationService;
 import de.sgirke.neuearbeit.service.WorkingDaysService;
 import de.sgirke.neuearbeit.utils.JsfUtils;
-import jakarta.faces.model.SelectItem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.fop.apps.FOPException;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.faces.model.SelectItem;
 import javax.xml.transform.TransformerException;
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
@@ -16,8 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Bean-Klasse für das Modul "Arbeitstage" mit Methoden zum Auslesen der Daten
- * aus dem Formular sowie der anschließenden Überprüfung der Eingaben.
+ * Bean-Klasse für das Modul "Arbeitstage" mit Methoden zum Auslesen der Daten aus dem Formular sowie der
+ * anschließenden Überprüfung der Eingaben.
  * @author Sebastian Girke
  */
 public class WorkingDaysBean {
@@ -74,16 +75,19 @@ public class WorkingDaysBean {
 	/**
 	 * Service-Objekt zum Generieren von PDF-Dokumenten
 	 */
+	@Autowired
 	private PdfService pdfService;
 	
 	/**
 	 * Service-Objekt zum Validieren von benutzerspezifischen Eingaben
 	 */
+	@Autowired
 	private ValidationService validationService;
 	
 	/**
 	 * Service-Objekt zum Berechnen der Arbeitstage für einen gewählten Zeitraum
 	 */
+	@Autowired
 	private WorkingDaysService workingDaysService;
 	
 	/**
