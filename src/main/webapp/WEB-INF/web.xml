@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="
-          https://jakarta.ee/xml/ns/jakartaee
-          https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" version="5.0">
+          http://xmlns.jcp.org/xml/ns/javaee
+          http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
 
   <display-name>Intranet-Applikation der "Neuen Arbeit Neustadt (Orla) e.V."</display-name>
 
   <error-page>
     <error-code>404</error-code>
-    <location>/view/errors/error404.jsf</location>
+    <location>/view/errors/error404.xhtml</location>
   </error-page>
   <error-page>
-    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
-    <location>/view/errors/sessionExpired.jsf</location>
+    <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
+    <location>/view/errors/sessionExpired.xhtml</location>
   </error-page>
 
   <context-param>
@@ -21,18 +21,18 @@
     <param-value>/WEB-INF/config/spring/application-context.xml</param-value>
   </context-param>
   <context-param><!-- JSF-spezifische ContextParameter -->
-    <param-name>javax.faces.CONFIG_FILES</param-name>
-    <param-value>/WEB-INF/config/jsf/faces-config.xml</param-value>
     <description>Pfad zur Konfigurationsdatei von JSF</description>
+    <param-name>jakarta.faces.CONFIG_FILES</param-name>
+    <param-value>/WEB-INF/config/jsf/faces-config.xml</param-value>
   </context-param>
   <context-param>
     <description>Parameter zum Setzen des aktuellen Projekt-Status</description>
-    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-name>jakarta.faces.PROJECT_STAGE</param-name>
     <param-value>Development</param-value><!-- (Development|Production) -->
   </context-param>
   <context-param>
     <description>Speichermethode (Server oder Client?)</description>
-    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-name>jakarta.faces.STATE_SAVING_METHOD</param-name>
     <param-value>server</param-value>
   </context-param>
   <context-param><!-- Allgemeine ContextParameter -->
@@ -52,11 +52,15 @@
 
   <servlet>
     <servlet-name>faces-servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>faces-servlet</servlet-name>
-    <url-pattern>*.jsf</url-pattern>
-<!--    <url-pattern>/jakarta.faces.resource/*</url-pattern>-->
+    <url-pattern>*.xhtml</url-pattern>
+<!--    <url-pattern>/javax.faces.resource/*</url-pattern>-->
   </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>/view/start.xhtml</welcome-file>
+  </welcome-file-list>
 </web-app>
