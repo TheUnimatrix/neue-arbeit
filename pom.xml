@@ -6,31 +6,25 @@
 
   <groupId>de.sgirke</groupId>
   <artifactId>neue-arbeit</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <version>2.0-ALPHA</version>
+<!--  <packaging>war</packaging>-->
 
   <name>neue-arbeit Maven Webapp</name>
   <url>https://neue-arbeit.de</url>
 
-  <repositories>
-    <repository>
-      <id>repository.spring.libs-milestone</id>
-      <name>Spring Lib Milestone repository</name>
-      <url>https://repo.spring.io/libs-milestone/</url>
-    </repository>
-    <repository>
-      <id>repository.spring.milestone</id>
-      <name>Spring Milestone repository</name>
-      <url>https://repo.spring.io/milestone/</url>
-    </repository>
-  </repositories>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.0.5</version>
+  </parent>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <apache.myfaces.version>2.3.9</apache.myfaces.version>
-    <springframework.version>5.3.19</springframework.version>
+    <apache.myfaces.version>4.0.0</apache.myfaces.version>
+    <springboot.version>3.0.5</springboot.version>
+    <myfaces.tobago.version>5.6.1</myfaces.tobago.version>
   </properties>
 
   <dependencies>
@@ -40,6 +34,23 @@
       <artifactId>javax.servlet-api</artifactId>
       <version>4.0.1</version>
       <scope>provided</scope>
+    </dependency>
+
+    <!-- SPRING BOOT DEPENDENCIES -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>${springboot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+      <version>${springboot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <version>${springboot.version}</version>
     </dependency>
 
     <!-- COMPILE -->
@@ -56,27 +67,27 @@
     <dependency>
       <groupId>org.apache.myfaces.tobago</groupId>
       <artifactId>tobago-core</artifactId>
-      <version>5.0.0</version>
+      <version>${myfaces.tobago.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.myfaces.tobago</groupId>
       <artifactId>tobago-theme-standard</artifactId>
-      <version>5.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>${springframework.version}</version>
+      <version>${myfaces.tobago.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>${springframework.version}</version>
+<!--      <version>${springframework.version}</version>-->
     </dependency>
+<!--    <dependency>-->
+<!--      <groupId>jakarta.xml.bind</groupId>-->
+<!--      <artifactId>jakarta.xml.bind-api</artifactId>-->
+<!--      <version>4.0.0</version>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>org.apache.xmlgraphics</groupId>
       <artifactId>fop</artifactId>
-      <version>2.7</version>
+      <version>2.8</version>
     </dependency>
 
     <!-- TEST-Dependencies -->
