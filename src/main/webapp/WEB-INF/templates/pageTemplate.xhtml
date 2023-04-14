@@ -19,27 +19,27 @@
 			<ui:insert name="header">
 				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 					<div class="container-fluid">
-						<a class="navbar-brand" href="#{request.contextPath}/view/start.jsf">
-							#{commonRsc.header}
-						</a>
+						<h:form>
+							<h:commandLink styleClass="navbar-brand" value="#{commonRsc.header}" action="#{navigation.indexPage}"/>
+						</h:form>
 						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 								data-bs-target="#navbar-content" aria-controls="navbar-content"
 								aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"/>
 						</button>
 						<div class="collapse navbar-collapse" id="navbar-content">
-							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-								<li class="nav-item">
-									<a class="nav-link" href="#{request.contextPath}/view/start.jsf">
-										#{commonRsc.navigationBar_start}
-									</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#{request.contextPath}/view/workingDays/page.jsf">
-										#{commonRsc.navigationBar_workingDays}
-									</a>
-								</li>
-							</ul>
+							<h:form>
+								<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+									<li class="nav-item">
+										<h:commandLink styleClass="nav-link" value="#{commonRsc.navigationBar_start}"
+												action="#{navigation.indexPage}"/>
+									</li>
+									<li class="nav-item">
+										<h:commandLink styleClass="nav-link" value="#{commonRsc.navigationBar_workingDays}"
+												action="#{navigation.workingDaysPage}"/>
+									</li>
+								</ul>
+							</h:form>
 						</div>
 					</div>
 				</nav>
