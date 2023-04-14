@@ -34,4 +34,6 @@
 		<property name="validationService" ref="validationService"/>
 		<property name="workingDaysService" ref="workingDaysService"/>
 	</bean>
+
+	<bean id="navigation" class="de.sgirke.neuearbeit.beans.NavigationBean"/>
 </beans>
