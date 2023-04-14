@@ -4,12 +4,12 @@ import de.sgirke.neuearbeit.service.PdfService;
 import de.sgirke.neuearbeit.service.ValidationService;
 import de.sgirke.neuearbeit.service.WorkingDaysService;
 import de.sgirke.neuearbeit.utils.JsfUtils;
+import jakarta.faces.model.SelectItem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.fop.apps.FOPException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.faces.model.SelectItem;
 import javax.xml.transform.TransformerException;
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
@@ -96,7 +96,7 @@ public class WorkingDaysBean {
 	 */
 	public List<SelectItem> getYearList() {
 		// Liste mit allen Jahren - beginnend mit dem aktuellen Jahr sowie den nächsten 9 Jahren,
-		// sodass ingesamt 10 Jahre zur Auswahl stehen
+		// sodass insgesamt 10 Jahre zur Auswahl stehen
 		List<SelectItem> yearList = new ArrayList<>();
 		yearList.add(new SelectItem(-1, "---"));
 		
