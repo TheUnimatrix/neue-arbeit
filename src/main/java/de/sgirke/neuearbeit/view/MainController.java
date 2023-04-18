@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/")
-    public String index() {
-        return "start";
+    @GetMapping
+    public String indexPage() {
+        return "index";
+    }
+
+    @GetMapping("/working-days")
+    public String workingDaysPage() {
+        return "working-days";
     }
 
 }
