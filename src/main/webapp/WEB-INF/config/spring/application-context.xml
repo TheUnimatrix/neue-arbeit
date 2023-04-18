@@ -14,7 +14,7 @@
 	</bean>
 	
 	<bean id="xmlService" class="de.sgirke.neuearbeit.service.impl.XmlServiceImpl">
-		<description>Service-Klasse zum Erstellen einer XML als String-Repräsentation</description>
+		<description>Service-Klasse zum Erstellen einer XML-Datei als String-Repräsentation</description>
 	</bean>
 	
 	<bean id="validationService" class="de.sgirke.neuearbeit.service.impl.ValidationServiceImpl">
