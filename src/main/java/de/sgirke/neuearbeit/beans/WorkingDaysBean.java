@@ -312,14 +312,12 @@ public class WorkingDaysBean {
 				if (LOG.isErrorEnabled()) {
 					LOG.error(fope.getMessage(), fope);
 				}
-				errorList.add("Beim Generieren des PDF-Dokuments ist ein "
-						+ "kritischer Fehler aufgetreten.");
+				errorList.add("Beim Generieren des PDF-Dokuments ist ein kritischer Fehler aufgetreten.");
 			} catch (TransformerException tce) {
 				if (LOG.isErrorEnabled()) {
 					LOG.error(tce.getMessage(), tce);
 				}
-				errorList.add("Beim Generieren des PDF-Dokuments ist ein "
-						+ "kritischer Fehler aufgetreten.");
+				errorList.add("Beim Generieren des PDF-Dokuments ist ein kritischer Fehler aufgetreten.");
 			}
 		}
 	}
