@@ -1,13 +1,13 @@
 $(document).ready(() => {
-	$("select[name $= ':startYear']").change(selectValueChange);
-	$("select[name $= ':endYear']").change(selectValueChange);
+	$("#startYear").change(selectValueChange);
+	$("#endYear").change(selectValueChange);
 });
 
-function selectValueChange(event) {
+function selectValueChange() {
 
 	// hole beide Auswahllisten
-	let $selectStartYear = $("select[name $= ':startYear']");
-	let $selectEndYear = $("select[name $= ':endYear']");
+	let $selectStartYear = $("#startYear");
+	let $selectEndYear = $("#endYear");
 
 	// hole die Komponente, welche das Event ausgelöst hat
 	let $eventTarget = $(event.target);
