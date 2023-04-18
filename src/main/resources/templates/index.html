@@ -4,12 +4,13 @@
 <body>
     <div th:replace="~{fragments/layout :: navbar}"></div>
 
-    <div th:replace="~{fragments/layout :: pageContent}">
+<!--    <main th:replace="~{fragments/layout :: page-content}">-->
+    <main class="container">
         <h4 th:text="#{start_headline}"></h4>
         <p th:text="#{start_content}"></p>
 
         <h5 th:text="#{start_module01_headline}"></h5>
         <p th:text="#{start_module01_content}"></p>
-    </div>
+    </main>
 </body>
 </html>
