@@ -3,7 +3,7 @@ $(document).ready(() => {
 	$("#endYear").change(selectValueChange);
 });
 
-function selectValueChange() {
+function selectValueChange(event) {
 
 	// hole beide Auswahllisten
 	let $selectStartYear = $("#startYear");
