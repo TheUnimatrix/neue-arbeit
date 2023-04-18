@@ -25,7 +25,7 @@
         <p th:text="#{workingDays_content_03}"></p>
         <p th:text="#{workingDays_content_04}"></p>
 
-        <form id="form-working-days" action="#">
+        <form id="form-working-days">
 
             <div th:text="#{workingDays_content_spaceOfTime}"></div>
 
@@ -39,100 +39,78 @@
                 <label class="form-check-label" for="radioSpaceTime-dates">Spezifischer Zeitraum mit Datumsangaben</label>
             </div>
 
+            <!-- Fieldset wird nur angezeigt, wenn Zeitraum in Jahren ausgewählt wurde -->
             <fieldset id="group-1">
                 <legend th:text="#{workingDays_spaceOfTime_years}"></legend>
 
+                <div class="mb-3">
+                    <label for="startYear" class="form-label" th:text="#{workingDays_startYear_label_value}"
+                           th:title="#{workingDays_startYear_label_title}"></label>
+                    <select id="startYear" name="startYear" class="form-select">
+                        <option>2000</option>
+                        <option>2001</option>
+                        <option>2002</option>
+                        <option>2003</option>
+                        <option>2004</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="endYear" class="form-label" th:text="#{workingDays_endYear_label_value}"
+                           th:title="#{workingDays_endYear_label_title}"></label>
+                    <select id="endYear" name="endYear" class="form-select">
+                        <option>2000</option>
+                        <option>2001</option>
+                        <option>2002</option>
+                        <option>2003</option>
+                        <option>2004</option>
+                    </select>
+                </div>
+
+                <input type="submit" class="btn btn-primary">
             </fieldset>
 
             <fieldset id="group-2">
                 <legend th:text="#{workingDays_spaceOfTime_dates}"></legend>
 
+                <!-- PanelGroup wird nur angezeigt, wenn Zeitraum mit Datumsangaben ausgewählt -->
+                <tc:panel collapsed="true" collapsedMode="hidden"><!-- rendered="#{workingDaysBean.spaceOfTimeSelection eq 'spaceOfTime_Dates'}" -->
+
+                    <tc:date id="startDate" label="#{commonRsc.workingDays_startDate_label_value}"
+                             value="#{workingDaysBean.startDate}"/>
+                    <tc:date id="endDate" label="#{commonRsc.workingDays_endDate_label_value}"
+                             value="#{workingDaysBean.endDate}"/>
+                </tc:panel>
+
+                <!--			<h:panelGroup styleClass="#{workingDaysBean.spaceOfTimeSelection == 'spaceOfTime_Dates' ? 'show' : 'hide'}">-->
+                <!--				<div class="boxDefinedLarge">-->
+                <!--					#{commonRsc.workingDays_spaceOfTime_dates}-->
+                <!--				</div>-->
+
+                <!--				<div class="boxDefinedOpen">-->
+                <!--					<div class="boxDefinedSmall">-->
+                <!--						<h:outputLabel id="startDate_Label" for="startDate"-->
+                <!--									   value="#{commonRsc.workingDays_startDate_label_value}"-->
+                <!--									   title="#{commonRsc.workingDays_startDate_label_title}"/>-->
+                <!--					</div>-->
+                <!--					<div class="boxDefinedMedium">-->
+                <!--						<h:inputText id="startDate" maxlength="10" value="#{workingDaysBean.startDate}"-->
+                <!--									 styleClass="inputTextDefinedMedium"/>-->
+                <!--					</div>-->
+
+                <!--					<div class="boxDefinedSmall">-->
+                <!--						<h:outputLabel id="endDate_Label" for="endDate"-->
+                <!--									   value="#{commonRsc.workingDays_endDate_label_value}"-->
+                <!--									   title="#{commonRsc.workingDays_endDate_label_title}"/>-->
+                <!--					</div>-->
+                <!--					<div class="boxDefinedMedium">-->
+                <!--						<h:inputText id="endDate" maxlength="10"-->
+                <!--									 value="#{workingDaysBean.endDate}"-->
+                <!--									 styleClass="inputTextDefinedMedium"/>-->
+                <!--					</div>-->
+                <!--				</div>-->
+                <!--			</h:panelGroup>-->
             </fieldset>
-
-
-            <!-- PanelGroup wird nur angezeigt, wenn Zeitraum in Jahren ausgewählt -->
-            <tc:panel collapsed="false"><!-- rendered="#{workingDaysBean.spaceOfTimeSelection eq 'spaceOfTime_Years'}" -->
-                <tc:selectOneChoice id="startYear" label="#{commonRsc.workingDays_startYear_label_value}"
-                                    value="#{workingDaysBean.startYear}">
-                    <f:selectItems value="#{workingDaysBean.yearList}"/>
-                </tc:selectOneChoice>
-
-                <tc:selectOneChoice id="endYear" label="#{commonRsc.workingDays_endYear_label_value}"
-                                    value="#{workingDaysBean.endYear}">
-                    <f:selectItems value="#{workingDaysBean.yearList}"/>
-                </tc:selectOneChoice>
-            </tc:panel>
-
-            <!--			<h:panelGroup styleClass="#{workingDaysBean.spaceOfTimeSelection eq 'spaceOfTime_Years' ? 'show' : 'hide'}">-->
-            <!--				<div class="boxDefinedLarge">-->
-            <!--					#{commonRsc.workingDays_spaceOfTime_years}-->
-            <!--				</div>-->
-
-            <!--				<h:outputLabel id="startYear_Label" for="startYear" styleClass="form-label"-->
-            <!--							   value="#{commonRsc.workingDays_startYear_label_value}"-->
-            <!--							   title="#{commonRsc.workingDays_startYear_label_title}"/>-->
-            <!--				<h:selectOneMenu id="startYear" styleClass="form-select"-->
-            <!--								 value="#{workingDaysBean.startYear}"-->
-            <!--								 onchange="selectValueChange(this,this.form)">-->
-            <!--					<f:selectItems value="#{workingDaysBean.yearList}"/>-->
-            <!--				</h:selectOneMenu>-->
-
-            <!--				<h:outputLabel id="endYear_Label" for="endYear"-->
-            <!--							   value="#{commonRsc.workingDays_endYear_label_value}"-->
-            <!--							   title="#{commonRsc.workingDays_endYear_label_title}"/>-->
-            <!--				<h:selectOneMenu id="endYear" styleClass="form-select"-->
-            <!--								 value="#{workingDaysBean.endYear}"-->
-            <!--								 onchange="selectValueChange(this,this.form)">-->
-            <!--					<f:selectItems value="#{workingDaysBean.yearList}"/>-->
-            <!--				</h:selectOneMenu>-->
-            <!--			</h:panelGroup>-->
-
-            <!--			<tc:button label="#{commonRsc.workingDays_submitButton_value}" markup="primary" defaultCommand="true"-->
-            <!--					   action="#{workingDaysBean.validateInput}"/>-->
-            <tc:button label="Button2" markup="primary"/>
-
-            <!-- PanelGroup wird nur angezeigt, wenn Zeitraum mit Datumsangaben ausgewählt -->
-            <tc:panel collapsed="true" collapsedMode="hidden">
-                <!--				rendered="#{workingDaysBean.spaceOfTimeSelection eq 'spaceOfTime_Dates'}"-->
-                <div>#{commonRsc.workingDays_spaceOfTime_dates}</div>
-
-                <tc:date id="startDate" label="#{commonRsc.workingDays_startDate_label_value}"
-                         value="#{workingDaysBean.startDate}"/>
-                <tc:date id="endDate" label="#{commonRsc.workingDays_endDate_label_value}"
-                         value="#{workingDaysBean.endDate}"/>
-            </tc:panel>
-
-
-
-
-            <!--			<h:panelGroup styleClass="#{workingDaysBean.spaceOfTimeSelection == 'spaceOfTime_Dates' ? 'show' : 'hide'}">-->
-            <!--				<div class="boxDefinedLarge">-->
-            <!--					#{commonRsc.workingDays_spaceOfTime_dates}-->
-            <!--				</div>-->
-
-            <!--				<div class="boxDefinedOpen">-->
-            <!--					<div class="boxDefinedSmall">-->
-            <!--						<h:outputLabel id="startDate_Label" for="startDate"-->
-            <!--									   value="#{commonRsc.workingDays_startDate_label_value}"-->
-            <!--									   title="#{commonRsc.workingDays_startDate_label_title}"/>-->
-            <!--					</div>-->
-            <!--					<div class="boxDefinedMedium">-->
-            <!--						<h:inputText id="startDate" maxlength="10" value="#{workingDaysBean.startDate}"-->
-            <!--									 styleClass="inputTextDefinedMedium"/>-->
-            <!--					</div>-->
-
-            <!--					<div class="boxDefinedSmall">-->
-            <!--						<h:outputLabel id="endDate_Label" for="endDate"-->
-            <!--									   value="#{commonRsc.workingDays_endDate_label_value}"-->
-            <!--									   title="#{commonRsc.workingDays_endDate_label_title}"/>-->
-            <!--					</div>-->
-            <!--					<div class="boxDefinedMedium">-->
-            <!--						<h:inputText id="endDate" maxlength="10"-->
-            <!--									 value="#{workingDaysBean.endDate}"-->
-            <!--									 styleClass="inputTextDefinedMedium"/>-->
-            <!--					</div>-->
-            <!--				</div>-->
-            <!--			</h:panelGroup>-->
         </form>
     </div>
 </body>
