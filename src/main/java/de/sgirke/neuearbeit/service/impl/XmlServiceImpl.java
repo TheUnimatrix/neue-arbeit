@@ -3,12 +3,14 @@ package de.sgirke.neuearbeit.service.impl;
 import de.sgirke.neuearbeit.service.XmlService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * Service-Implementierung zum Generieren von XML-Dateien als String-Repräsentation. Dafür werden Methoden zur
  * Verfügung gestellt, mit denen einzelne Knoten sowie entsprechende Inhalte an die Knoten angehängt werden können.
  * @author Sebastian Girke
  */
+@Service
 public class XmlServiceImpl implements XmlService {
 	
 	/** Logger-Objekt */

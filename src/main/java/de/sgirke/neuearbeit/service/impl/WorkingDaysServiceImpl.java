@@ -13,12 +13,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.sgirke.neuearbeit.model.Holiday;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Service-Implementierung zum Berechnen der Arbeitstage für einen bestimmten Zeitraum in Jahren oder mit Datumsangaben
  * sowie zum Erstellen einer XML mit den angeforderten Daten.
  * @author Sebastian Girke
  */
+@Service
 public class WorkingDaysServiceImpl implements WorkingDaysService {
 	
 	/** Logger-Objekt */
@@ -28,9 +31,11 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 	private static final List<String> monthList;
 	
 	/** Service-Objekt zum Holen aller gesetzlichen Feiertage in Thüringen in Listenform */
+	@Autowired
 	private HolidayService holidayService;
 	
 	/** Service-Objekt zum Erstellen einer XML als String-Repräsentation */
+	@Autowired
 	private XmlService xmlService;
 	
 	// Befüllen der statischen Liste mit allen Monatsnamen
@@ -49,39 +54,7 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 		monthList.add("November");
 		monthList.add("Dezember");
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see de.sgirke.neuearbeit.service.WorkingDaysService#setHolidayService(de.sgirke.neuearbeit.service.HolidayService)
-	 */
-	public void setHolidayService(HolidayService holidayService) {
-		this.holidayService = holidayService;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see de.sgirke.neuearbeit.service.WorkingDaysService#getHolidayService()
-	 */
-	public HolidayService getHolidayService() {
-		return holidayService;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see de.sgirke.neuearbeit.service.WorkingDaysService#setXmlService(de.sgirke.neuearbeit.service.XmlService)
-	 */
-	public void setXmlService(XmlService xmlService) {
-		this.xmlService = xmlService;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see de.sgirke.neuearbeit.service.WorkingDaysService#getXmlService()
-	 */
-	public XmlService getXmlService() {
-		return xmlService;
-	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see de.sgirke.neuearbeit.service.WorkingDaysService#calculateWorkingDays(java.lang.Integer, java.lang.Integer)

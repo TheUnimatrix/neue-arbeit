@@ -10,12 +10,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.sgirke.neuearbeit.model.Holiday;
+import org.springframework.stereotype.Service;
 
 /**
  * Service-Implementierung zum Berechnen der gesetzlichen Feiertage in Thüringen und Erstellen einer Liste mit
  * {@link Holiday}-Objekten zur weiteren Verwendung innerhalb der Applikation
  * @author Sebastian Girke
  */
+@Service
 public class HolidayServiceImpl implements HolidayService {
 	
 	/** Logger-Objekt */

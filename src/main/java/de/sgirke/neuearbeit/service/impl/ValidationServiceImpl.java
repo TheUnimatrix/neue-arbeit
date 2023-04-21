@@ -13,12 +13,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.sgirke.neuearbeit.model.Holiday;
+import org.springframework.stereotype.Service;
 
 /**
  * Service-Implementierung zum Validieren benutzerspezifischer Eingaben mit Methoden zum Überprüfen von Jahresangaben
  * sowie von eingegebenen Datumsangaben.
  * @author Sebastian Girke
  */
+@Service
 public class ValidationServiceImpl implements ValidationService {
 	
 	/** Logger-Objekt */
