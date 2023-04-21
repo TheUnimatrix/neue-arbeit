@@ -34,7 +34,7 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 	@Autowired
 	private HolidayService holidayService;
 	
-	/** Service-Objekt zum Erstellen einer XML als String-Repräsentation */
+	/** Service-Objekt zum Erstellen einer XML-Datei als String-Repräsentation */
 	@Autowired
 	private XmlService xmlService;
 	
