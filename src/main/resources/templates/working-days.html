@@ -7,7 +7,7 @@
     <div th:replace="~{fragments/layout :: navbar}"></div>
 
     <div class="container">
-        <h4 th:text="#{workingDays_header}">TEST</h4>
+        <h4 th:text="#{workingDays_header}"></h4>
 
         <!--    <h:messages styleClass="d-none"/>-->
 
@@ -19,70 +19,64 @@
         </t:dataList>
         -->
 
-        <p th:text="#{test_string}"></p>
-        <p>ÄäÖöÜüß</p>
-
         <p th:text="#{workingDays_content_01}"></p>
         <p th:text="#{workingDays_content_02}"></p>
         <p th:text="#{workingDays_content_03}"></p>
         <p th:text="#{workingDays_content_04}"></p>
 
-        <form id="form-working-days">
+        <div class="row gx-5">
+            <!-- Fieldset für Zeitraum in Jahren -->
+            <div class="col">
+                <form th:action="@{/working-days}" method="post">
+                    <fieldset id="group-1" class="border border-2 rounded-3 p-2">
 
-            <div th:text="#{workingDays_content_spaceOfTime}"></div>
+                        <legend th:text="#{workingDays_spaceOfTime_years}"></legend>
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioSpaceTime" id="radioSpaceTime-years" value="years" checked>
-                <label class="form-check-label" for="radioSpaceTime-years">Unbestimmter Zeitraum in Jahren</label>
+                        <div class="mb-3">
+                            <label for="startYear" class="form-label" th:text="#{workingDays_startYear_label_value}"
+                                   th:title="#{workingDays_startYear_label_title}"></label>
+                            <select id="startYear" name="startYear" class="form-select">
+                                <option th:each="year : ${yearList}" th:text="${year}"></option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="endYear" class="form-label" th:text="#{workingDays_endYear_label_value}"
+                                   th:title="#{workingDays_endYear_label_title}"></label>
+                            <select id="endYear" name="endYear" class="form-select">
+                                <option th:each="year : ${yearList}" th:text="${year}"></option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" th:text="#{workingDays_submitButton_value}"></button>
+                    </fieldset>
+                </form>
             </div>
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioSpaceTime" id="radioSpaceTime-dates" value="dates" >
-                <label class="form-check-label" for="radioSpaceTime-dates">Spezifischer Zeitraum mit Datumsangaben</label>
+            <!-- Fieldset für Zeitraum mit Datumsangaben -->
+            <div class="col">
+                <form>
+                    <fieldset id="group-2" class="border border-2 rounded-3 p-2">
+
+                        <legend th:text="#{workingDays_spaceOfTime_dates}"></legend>
+
+                        <div class="mb-3">
+                            <label for="startDate" class="form-label" th:text="#{workingDays_startDate_label_value}"
+                                   th:title="#{workingDays_startDate_label_title}"></label>
+                            <input id="startDate" name="startDate" type="date" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="endDate" class="form-label" th:text="#{workingDays_endDate_label_value}"
+                                   th:title="#{workingDays_endDate_label_title}"></label>
+                            <input id="endDate" name="endDate" type="date" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" th:text="#{workingDays_submitButton_value}"></button>
+                    </fieldset>
+                </form>
             </div>
-
-            <!-- Fieldset wird nur angezeigt, wenn Zeitraum in Jahren ausgewählt wurde -->
-            <fieldset id="group-1" class="border border-2 rounded-3 p-2">
-                <legend th:text="#{workingDays_spaceOfTime_years}"></legend>
-
-                <div class="mb-3">
-                    <label for="startYear" class="form-label" th:text="#{workingDays_startYear_label_value}"
-                           th:title="#{workingDays_startYear_label_title}"></label>
-                    <select id="startYear" name="startYear" class="form-select">
-                        <option th:each="year : ${yearList}" th:text="${year}"></option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="endYear" class="form-label" th:text="#{workingDays_endYear_label_value}"
-                           th:title="#{workingDays_endYear_label_title}"></label>
-                    <select id="endYear" name="endYear" class="form-select">
-                        <option th:each="year : ${yearList}" th:text="${year}"></option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-primary" th:text="#{workingDays_submitButton_value}"></button>
-            </fieldset>
-
-            <!-- Fieldset wird nur angezeigt, wenn Zeitraum mit Datumsangaben ausgewählt wurde -->
-            <fieldset id="group-2" class="border border-2 rounded-3 p-2">
-                <legend th:text="#{workingDays_spaceOfTime_dates}"></legend>
-
-                <div class="mb-3">
-                    <label for="startDate" class="form-label" th:text="#{workingDays_startDate_label_value}"
-                           th:title="#{workingDays_startDate_label_title}"></label>
-                    <input id="startDate" name="startDate" type="date" class="form-control">
-                </div>
-
-                <div class="mb-3">
-                    <label for="endDate" class="form-label" th:text="#{workingDays_endDate_label_value}"
-                           th:title="#{workingDays_endDate_label_title}"></label>
-                    <input id="endDate" name="endDate" type="date" class="form-control">
-                </div>
-
-                <button type="submit" class="btn btn-primary" th:text="#{workingDays_submitButton_value}"></button>
-            </fieldset>
-        </form>
+        </div>
     </div>
 </body>
 </html>
