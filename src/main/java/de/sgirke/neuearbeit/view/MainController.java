@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.xml.transform.TransformerException;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,6 @@ import java.util.List;
 public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-
-    @Autowired
-    private ValidationService validationService;
 
     @Autowired
     private WorkingDaysService workingDaysService;
@@ -78,16 +76,14 @@ public class MainController {
                     pdfService.generateWorkingDaysPdfNonspecificSpaceOfTime(workingDaysXml);
 
             // Erstelle Dateinamen und sende Datei an Browser
-            String fileName = "Arbeitstage.pdf";
+//            String fileName = "Arbeitstage.pdf";
             byte[] test = workingDaysPdfStream.toByteArray();
 
             logger.debug("PDF-Länge={}", test.length);
 
             return test;
-        } catch (FOPException fope) {
-            logger.error(fope.getMessage(), fope);
-        } catch (TransformerException tce) {
-            logger.error(tce.getMessage(), tce);
+        } catch (FOPException | TransformerException | IOException exc) {
+            logger.error(exc.getMessage(), exc);
         }
 
         return null;

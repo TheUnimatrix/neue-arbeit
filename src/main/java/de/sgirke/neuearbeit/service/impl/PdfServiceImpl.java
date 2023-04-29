@@ -7,6 +7,7 @@ import org.apache.fop.apps.FOPException;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import javax.xml.transform.*;
@@ -25,55 +26,27 @@ public class PdfServiceImpl implements PdfService {
 	/** Logger-Objekt */
 	private static final Log log = LogFactory.getLog(PdfServiceImpl.class);
 
-	public ByteArrayOutputStream generateWorkingDaysPdfNonspecificSpaceOfTime(String xmlWorkingDays) throws FOPException, TransformerException {
-		
-		// Hole externen Context zum Holen des Pfades zur XSL-Datei
-//		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-
-		// Hole Pfad zur XSL-Datei
-//		String pathXslPdfFile = context.getInitParameter(CONTEXT_PARAM_XSL_YEARS_PDF_FILE);
-
-//		if (log.isDebugEnabled()) {
-//			log.debug("Pfad zur XSL-Datei geholt: '" + pathXslPdfFile + "'");
-//		}
-
-		// Generiere PDF-Dokument als Stream und gebe diesen zurück
-//		return this.generatePdfStream(pathXslPdfFile, xmlWorkingDays, context);
-		return this.generatePdfStream("pathXslPdfFile", xmlWorkingDays);
+	public ByteArrayOutputStream generateWorkingDaysPdfNonspecificSpaceOfTime(String xmlWorkingDays)
+			throws FOPException, TransformerException, IOException {
+		return this.generatePdfStream("static/xslt/workingDays_Years.pdf.xsl", xmlWorkingDays);
 	}
 
-
-	public ByteArrayOutputStream generateWorkingDaysPdfSpecificSpaceOfTime(String xmlWorkingDays) throws FOPException, TransformerException {
-		/*
-		// Hole externen Context zum Holen des Pfades zur XSL-Datei
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-
-		// Hole Pfad zur XSL-Datei
-		String pathXslPdfFile = context.getInitParameter(CONTEXT_PARAM_XSL_DATES_PDF_FILE);
-
-		if (log.isDebugEnabled()) {
-			log.debug("Pfad zur XSL-Datei geholt: '" + pathXslPdfFile + "'");
-		}
-		
-		// Generiere PDF-Dokument als Stream und gebe diesen zurück
-//		return this.generatePdfStream(pathXslPdfFile, xmlWorkingDays, context);
-		return this.generatePdfStream(pathXslPdfFile, xmlWorkingDays);
-		 */
-		return null;
+	public ByteArrayOutputStream generateWorkingDaysPdfSpecificSpaceOfTime(String xmlWorkingDays)
+			throws FOPException, TransformerException, IOException {
+		return this.generatePdfStream("static/xslt/workingDays_Dates.pdf.xsl", xmlWorkingDays);
 	}
 	
 	/**
-	 * Methode zum Generieren eines PDF-Dokuments als Stream, welches aus einer XML und einer XSL entsteht.
+	 * Methode zum Generieren eines PDF-Dokuments als Stream, welches aus einer XML-Datei und einer XSL entsteht.
 	 * @param pathXslPdfFile Pfad zur jeweils benötigten XSL-Datei
 	 * @param xmlFile XML als String-Repräsentation mit erforderlichen Daten
-//	 * @param context externer Context zum Laden der XSL-Datei
 	 * @return generiertes PDF-Dokument als Stream
 	 * @throws TransformerException eine Exception beim Generieren des Formulars
 	 * @throws FOPException eine Exception beim Generieren des Formulars
+	 * @throws IOException Exception, die beim Suchen der XSL-Datei auftreten kann
 	 */
-//	private ByteArrayOutputStream generatePdfStream(String pathXslPdfFile, String xmlFile, ExternalContext context)
-//			throws FOPException, TransformerException  {
-	private ByteArrayOutputStream generatePdfStream(String pathXslPdfFile, String xmlFile) throws TransformerException, FOPException {
+	private ByteArrayOutputStream generatePdfStream(String pathXslPdfFile, String xmlFile)
+			throws TransformerException, FOPException, IOException {
 		
 		ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
 
@@ -85,8 +58,8 @@ public class PdfServiceImpl implements PdfService {
 		Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, pdfStream);
 
 		// Hole Quelldaten als Streams (XSL-Datei + XML als String)
-//		Source xslSrc = new StreamSource(context.getResourceAsStream(pathXslPdfFile));
-		Source xslSrc = new StreamSource(new File("src/main/resources/static/xslt/workingDays_Years.pdf.xsl"));
+		ClassPathResource cpr = new ClassPathResource(pathXslPdfFile);
+		Source xslSrc = new StreamSource(cpr.getFile());
 		Source xmlSrc = new StreamSource(new StringReader(xmlFile));
 
 		if (log.isDebugEnabled()) {
