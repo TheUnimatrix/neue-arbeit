@@ -7,7 +7,6 @@
   <groupId>de.sgirke</groupId>
   <artifactId>neue-arbeit</artifactId>
   <version>2.0-ALPHA</version>
-<!--  <packaging>war</packaging>-->
 
   <name>neue-arbeit Maven Webapp</name>
   <url>https://neue-arbeit.de</url>
@@ -19,24 +18,12 @@
   </parent>
 
   <properties>
-<!--    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-<!--    <maven.compiler.source>17</maven.compiler.source>-->
-<!--    <maven.compiler.target>17</maven.compiler.target>-->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17 </java.version>
-    <apache.myfaces.version>4.0.0</apache.myfaces.version>
     <springboot.version>3.0.6</springboot.version>
-<!--    <myfaces.tobago.version>5.6.1</myfaces.tobago.version>-->
   </properties>
 
   <dependencies>
-    <!-- PROVIDED -->
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>6.0.0</version>
-      <scope>provided</scope>
-    </dependency>
-
     <!-- SPRING BOOT DEPENDENCIES -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -49,50 +36,16 @@
       <version>${springboot.version}</version>
     </dependency>
 
-    <!-- SPRING BOOT DEVTOOLS -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <version>${springboot.version}</version>
-      <scope>runtime</scope>
-      <optional>true</optional>
-    </dependency>
-
     <!-- COMPILE -->
-    <dependency>
-      <groupId>org.apache.myfaces.core</groupId>
-      <artifactId>myfaces-api</artifactId>
-      <version>${apache.myfaces.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.myfaces.core</groupId>
-      <artifactId>myfaces-impl</artifactId>
-      <version>${apache.myfaces.version}</version>
-    </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.apache.myfaces.tobago</groupId>-->
-<!--      <artifactId>tobago-core</artifactId>-->
-<!--      <version>${myfaces.tobago.version}</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.apache.myfaces.tobago</groupId>-->
-<!--      <artifactId>tobago-theme-standard</artifactId>-->
-<!--      <version>${myfaces.tobago.version}</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.springframework</groupId>-->
-<!--      <artifactId>spring-context</artifactId>-->
-<!--      <version>${springframework.version}</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>jakarta.xml.bind</groupId>-->
-<!--      <artifactId>jakarta.xml.bind-api</artifactId>-->
-<!--      <version>4.0.0</version>-->
-<!--    </dependency>-->
     <dependency>
       <groupId>org.apache.xmlgraphics</groupId>
       <artifactId>fop</artifactId>
       <version>2.8</version>
+    </dependency>
+    <dependency><!-- Aktuellere Dependency für Spring-Boot (Web), weil sonst Vulnerability-Warnung erscheint -->
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>2.0</version>
     </dependency>
 
     <!-- TEST-Dependencies -->
@@ -113,38 +66,6 @@
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${springboot.version}</version>
         </plugin>
-<!--        <plugin>-->
-<!--          <artifactId>maven-clean-plugin</artifactId>-->
-<!--          <version>3.1.0</version>-->
-<!--        </plugin>-->
-<!--        <plugin>-->
-<!--          <artifactId>maven-resources-plugin</artifactId>-->
-<!--          <version>3.3.1</version>-->
-<!--        </plugin>-->
-<!--        <plugin>-->
-<!--          <artifactId>maven-compiler-plugin</artifactId>-->
-<!--          <version>3.11.0</version>-->
-<!--        </plugin>-->
-<!--        <plugin>-->
-<!--          <artifactId>maven-surefire-plugin</artifactId>-->
-<!--          <version>2.22.1</version>-->
-<!--        </plugin>-->
-<!--        <plugin>-->
-<!--          <artifactId>maven-war-plugin</artifactId>-->
-<!--          <version>3.2.2</version>-->
-<!--        </plugin>-->
-<!--        <plugin>-->
-<!--          <artifactId>maven-install-plugin</artifactId>-->
-<!--          <version>2.5.2</version>-->
-<!--        </plugin>-->
-<!--        <plugin>-->
-<!--          <artifactId>maven-deploy-plugin</artifactId>-->
-<!--          <version>2.8.2</version>-->
-<!--        </plugin>-->
-<!--        <plugin>-->
-<!--          <artifactId>maven-jar-plugin</artifactId>-->
-<!--          <version>3.3.0</version>-->
-<!--        </plugin>-->
       </plugins>
     </pluginManagement>
   </build>
