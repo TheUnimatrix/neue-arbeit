@@ -3,7 +3,6 @@ package de.sgirke.neuearbeit.view;
 import de.sgirke.neuearbeit.service.PdfService;
 import de.sgirke.neuearbeit.service.ValidationService;
 import de.sgirke.neuearbeit.service.WorkingDaysService;
-import de.sgirke.neuearbeit.utils.JsfUtils;
 import org.apache.fop.apps.FOPException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

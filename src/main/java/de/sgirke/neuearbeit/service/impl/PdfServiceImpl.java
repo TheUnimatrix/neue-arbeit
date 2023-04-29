@@ -1,8 +1,6 @@
 package de.sgirke.neuearbeit.service.impl;
 
 import de.sgirke.neuearbeit.service.PdfService;
-import jakarta.faces.context.ExternalContext;
-import jakarta.faces.context.FacesContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.fop.apps.FOPException;
@@ -43,9 +41,10 @@ public class PdfServiceImpl implements PdfService {
 //		return this.generatePdfStream(pathXslPdfFile, xmlWorkingDays, context);
 		return this.generatePdfStream("pathXslPdfFile", xmlWorkingDays);
 	}
-	
+
+
 	public ByteArrayOutputStream generateWorkingDaysPdfSpecificSpaceOfTime(String xmlWorkingDays) throws FOPException, TransformerException {
-		
+		/*
 		// Hole externen Context zum Holen des Pfades zur XSL-Datei
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 
@@ -59,6 +58,8 @@ public class PdfServiceImpl implements PdfService {
 		// Generiere PDF-Dokument als Stream und gebe diesen zurück
 //		return this.generatePdfStream(pathXslPdfFile, xmlWorkingDays, context);
 		return this.generatePdfStream(pathXslPdfFile, xmlWorkingDays);
+		 */
+		return null;
 	}
 	
 	/**
