@@ -23,9 +23,10 @@
 				 	<xsl:for-each select="root/currentYear">
 				 	
 				 		<!-- Überschrift -->
-				 		<fo:block font-family="Arial, sans-serif" font-size="15pt" font-weight="bold" margin-top="20pt" text-decoration="underline">
-							Monatliche Arbeitstage in
-							<xsl:value-of select="year"/>
+				 		<fo:block font-family="Arial, sans-serif" font-size="15pt" font-weight="bold" margin-top="20pt">
+							<fo:inline text-decoration="underline">
+								Monatliche Arbeitstage in <xsl:value-of select="year"/>
+							</fo:inline>
 						</fo:block>
 						
 						<!-- Tabelle mit Arbeitstagen -->
