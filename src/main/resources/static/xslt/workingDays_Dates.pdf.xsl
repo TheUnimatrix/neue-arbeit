@@ -3,7 +3,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:fo="http://www.w3.org/1999/XSL/Format">
 	
-	<xsl:template match="/">
+	<xsl:template match="/root">
 		
 		<fo:root>
 			<fo:layout-master-set>
@@ -18,11 +18,11 @@
 				 <fo:flow flow-name="xsl-region-body">
 				 
 				 	<!-- Überschrift -->
-				 	<fo:block font-family="Arial, sans-serif" font-size="14pt" font-weight="bold" margin-top="20pt" text-decoration="underline">
-						Monatliche Arbeitstage
-						(<xsl:value-of select="root/month[position() = 1]/durationStart"/>
-						-
-						<xsl:value-of select="root/month[last()]/durationEnd"/>)
+				 	<fo:block font-family="Arial, sans-serif" font-size="14pt" font-weight="bold" margin-top="20pt">
+						<fo:inline text-decoration="underline">
+							Monatliche Arbeitstage (<xsl:value-of select="month[position() = 1]/durationStart"/>
+							- <xsl:value-of select="month[last()]/durationEnd"/>)
+						</fo:inline>
 					</fo:block>
 				 	
 					<!-- Tabelle mit Arbeitstagen -->
@@ -35,14 +35,10 @@
 						<fo:table-header>
 							<fo:table-row text-align="center" font-size="14pt" font-weight="bold">
 								<fo:table-cell border="solid black 1pt" padding="3pt">
-									<fo:block>
-										Zeitraum
-									</fo:block>
+									<fo:block>Zeitraum</fo:block>
 								</fo:table-cell>
 								<fo:table-cell border="solid black 1pt" padding="3pt">
-									<fo:block>
-										Anzahl der Arbeitstage
-									</fo:block>
+									<fo:block>Anzahl der Arbeitstage</fo:block>
 								</fo:table-cell>
 							</fo:table-row>
 						</fo:table-header>
@@ -58,7 +54,7 @@
 								<fo:table-cell text-align="center" font-size="14pt" padding="3pt">
 									<fo:block>
 										<!-- Berechne Gesamtanzahl der Arbeitstage für den gesamten Zeitraum -->
-										<xsl:value-of select="sum(root/month/workingDays)"/>
+										<xsl:value-of select="sum(month/workingDays)"/>
 									</fo:block>
 								</fo:table-cell>
 							</fo:table-row>
@@ -68,7 +64,7 @@
 						<fo:table-body>
 						
 							<!-- Iteriere über alle Monate des gesamten Zeitraums -->
-							<xsl:for-each select="root/month">
+							<xsl:for-each select="month">
 								<fo:table-row>
 									<fo:table-cell font-size="14pt" border="solid black 1pt" padding="3pt">
 										<fo:block>
