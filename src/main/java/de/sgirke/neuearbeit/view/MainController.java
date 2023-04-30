@@ -1,19 +1,20 @@
 package de.sgirke.neuearbeit.view;
 
 import de.sgirke.neuearbeit.service.PdfService;
-import de.sgirke.neuearbeit.service.ValidationService;
 import de.sgirke.neuearbeit.service.WorkingDaysService;
 import org.apache.fop.apps.FOPException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.xml.transform.TransformerException;
 import java.io.ByteArrayOutputStream;
@@ -27,32 +28,45 @@ public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    @Autowired
-    private WorkingDaysService workingDaysService;
+    private final WorkingDaysService workingDaysService;
+
+    private final PdfService pdfService;
 
     @Autowired
-    private PdfService pdfService;
+    public MainController(WorkingDaysService workingDaysService, PdfService pdfService) {
+        this.workingDaysService = workingDaysService;
+        this.pdfService = pdfService;
+    }
 
     @GetMapping
-    public String indexPage() {
+    public String doIndexPageGet() {
         return "index";
     }
 
     @GetMapping("/working-days")
-    public String workingDaysGetMapping(Model model) {
-        if (model.getAttribute("yearList") == null)
-            model.addAttribute("yearList", getYearList());
+    public String doWorkingDaysGet(Model model) {
+        this.prepareModel(model);
         return "working-days";
     }
 
-    @PostMapping(value = "/working-days", produces = MediaType.APPLICATION_PDF_VALUE)
-    public @ResponseBody byte[] workingDaysPostMapping(Model model, @RequestParam int startYear, @RequestParam int endYear) {
+    @PostMapping("/working-days")
+    public ResponseEntity<ByteArrayResource> doWorkingDaysPost(Model model, @RequestParam int startYear, @RequestParam int endYear) {
 
-        byte[] test = this.generateWorkingDaysPdfYears(startYear, endYear);
+        ByteArrayOutputStream workingDaysPdfStream = this.generateWorkingDaysPdfYears(startYear, endYear);
+        ByteArrayResource pdfByteArrayResource = new ByteArrayResource(workingDaysPdfStream.toByteArray());
 
+        this.prepareModel(model);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_PDF)
+                .contentLength(pdfByteArrayResource.contentLength())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Arbeitstage.pdf")
+                .body(pdfByteArrayResource);
+    }
+
+    private void prepareModel(Model model) {
         if (model.getAttribute("yearList") == null)
             model.addAttribute("yearList", getYearList());
-        return test;
     }
 
     private List<Integer> getYearList() {
@@ -65,28 +79,20 @@ public class MainController {
         return yearList;
     }
 
-    private byte[] generateWorkingDaysPdfYears(int startYear, int endYear) {
+    private ByteArrayOutputStream generateWorkingDaysPdfYears(int startYear, int endYear) {
+        ByteArrayOutputStream workingDaysPdfStream = null;
+
         try {
             // Hole XML mit Arbeitstagen für gewünschten Zeitraum
             String workingDaysXml = workingDaysService.calculateWorkingDays(startYear, endYear);
             logger.debug("workingDaysXml={}", workingDaysXml);
 
             // Hole PDF-Dokument als Stream
-            ByteArrayOutputStream workingDaysPdfStream =
-                    pdfService.generateWorkingDaysPdfNonspecificSpaceOfTime(workingDaysXml);
-
-            // Erstelle Dateinamen und sende Datei an Browser
-//            String fileName = "Arbeitstage.pdf";
-            byte[] test = workingDaysPdfStream.toByteArray();
-
-            logger.debug("PDF-Länge={}", test.length);
-
-            return test;
+            workingDaysPdfStream = pdfService.generateWorkingDaysPdfNonspecificSpaceOfTime(workingDaysXml);
         } catch (FOPException | TransformerException | IOException exc) {
             logger.error(exc.getMessage(), exc);
         }
 
-        return null;
+        return workingDaysPdfStream;
     }
-
 }
