@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de" data-bs-theme="dark">
+<head th:replace="~{fragments/layout :: header}"></head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar}"></div>
+
+    <main class="container">
+        <h4 th:text="#{errorPages_error404_headline}"></h4>
+        <p th:text="#{errorPages_error404_content}"></p>
+    </main>
+</body>
+</html>
