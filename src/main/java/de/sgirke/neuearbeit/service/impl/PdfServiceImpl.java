@@ -1,19 +1,22 @@
 package de.sgirke.neuearbeit.service.impl;
 
 import de.sgirke.neuearbeit.service.PdfService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.fop.apps.FOPException;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import javax.xml.transform.*;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 
 /**
  * Service-Implementierung zum Generieren eines PDF-Dokuments, welches alle Arbeitstage eines bestimmten
@@ -24,7 +27,7 @@ import java.io.*;
 public class PdfServiceImpl implements PdfService {
 
 	/** Logger-Objekt */
-	private static final Log log = LogFactory.getLog(PdfServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(PdfServiceImpl.class);
 
 	public ByteArrayOutputStream generateWorkingDaysPdfNonspecificSpaceOfTime(String xmlWorkingDays)
 			throws FOPException, TransformerException, IOException {
@@ -61,21 +64,14 @@ public class PdfServiceImpl implements PdfService {
 		ClassPathResource cpr = new ClassPathResource(pathXslPdfFile);
 		Source xslSrc = new StreamSource(cpr.getFile());
 		Source xmlSrc = new StreamSource(new StringReader(xmlFile));
-
-		if (log.isDebugEnabled()) {
-			log.debug("Benötigte Quell-Dateien (XSL,XML) geholt");
-		}
+		logger.debug("Benötigte Quell-Dateien (XSL,XML) geholt");
 
 		Transformer transformer = factory.newTransformer(xslSrc);
-
 		Result res = new SAXResult(fop.getDefaultHandler());
 
 		// Transformiere Daten in das gewünschte Format
 		transformer.transform(xmlSrc, res);
-
-		if (log.isInfoEnabled()) {
-			log.info("PDF-Generierung erfolgreich");
-		}
+		logger.info("PDF-Generierung erfolgreich");
 
 		return pdfStream;
 	}

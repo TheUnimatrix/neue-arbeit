@@ -6,10 +6,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import de.sgirke.neuearbeit.service.HolidayService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import de.sgirke.neuearbeit.model.Holiday;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,17 +21,14 @@ import org.springframework.stereotype.Service;
 public class HolidayServiceImpl implements HolidayService {
 	
 	/** Logger-Objekt */
-	private static final Log LOG = LogFactory.getLog(HolidayServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(HolidayServiceImpl.class);
 
-	/** Liste mit {@link Holiday}-Objekten, die alle gesetzlichen Feiertage in Thüringen enthält */
-	private List<Holiday> holidayList;
-	
 	/*
 	 * (non-Javadoc)
 	 * @see de.sgirke.neuearbeit.service.HolidayService#getAllHolidays(int, int)
 	 */
 	public List<Holiday> getAllHolidays(int startYear, int endYear) {
-		holidayList = new ArrayList<Holiday>();
+		List<Holiday> holidayList = new ArrayList<>();
 		
 		// Iteriere über ausgewählten Zeitraum
 		for (int year = startYear; year <= endYear; year++) {
@@ -56,13 +53,10 @@ public class HolidayServiceImpl implements HolidayService {
 			 */
 			holidayList.add(new Holiday("Heiligabend", new GregorianCalendar(year, Calendar.DECEMBER, 24)));
 			holidayList.add(new Holiday("Silvester", new GregorianCalendar(year, Calendar.DECEMBER, 31)));
-			
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Liste mit allen Feiertagen in Thüringen erstellt (startYear='" + startYear + "'; " +
-						"endYear='" + endYear + "'; holidayList.size='" + holidayList.size() + "')");
-			}
 		}
-		
+
+		logger.debug("Liste mit allen Feiertagen in Thüringen erstellt (startYear='{}; endYear='{}; holidayList.size='{}')",
+				startYear, endYear, holidayList.size());
 		return holidayList;
 	}
 	

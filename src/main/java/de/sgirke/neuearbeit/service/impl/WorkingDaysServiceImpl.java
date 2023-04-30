@@ -1,20 +1,19 @@
 package de.sgirke.neuearbeit.service.impl;
 
+import de.sgirke.neuearbeit.model.Holiday;
+import de.sgirke.neuearbeit.service.HolidayService;
+import de.sgirke.neuearbeit.service.WorkingDaysService;
+import de.sgirke.neuearbeit.service.XmlService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-
-import de.sgirke.neuearbeit.service.HolidayService;
-import de.sgirke.neuearbeit.service.WorkingDaysService;
-import de.sgirke.neuearbeit.service.XmlService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import de.sgirke.neuearbeit.model.Holiday;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * Service-Implementierung zum Berechnen der Arbeitstage für einen bestimmten Zeitraum in Jahren oder mit Datumsangaben
@@ -25,18 +24,22 @@ import org.springframework.stereotype.Service;
 public class WorkingDaysServiceImpl implements WorkingDaysService {
 	
 	/** Logger-Objekt */
-	private static final Log LOG = LogFactory.getLog(WorkingDaysServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(WorkingDaysServiceImpl.class);
 	
 	/** Liste mit den Namen aller Monate */
 	private static final List<String> monthList;
 	
 	/** Service-Objekt zum Holen aller gesetzlichen Feiertage in Thüringen in Listenform */
-	@Autowired
-	private HolidayService holidayService;
+	private final HolidayService holidayService;
 	
 	/** Service-Objekt zum Erstellen einer XML-Datei als String-Repräsentation */
+	private final XmlService xmlService;
+
 	@Autowired
-	private XmlService xmlService;
+	public WorkingDaysServiceImpl(HolidayService holidayService, XmlService xmlService) {
+		this.holidayService = holidayService;
+		this.xmlService = xmlService;
+	}
 	
 	// Befüllen der statischen Liste mit allen Monatsnamen
 	static {
@@ -77,8 +80,7 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 			for (int currentMonth = 0; currentMonth < 12; currentMonth++) {
 				// Füge Knoten zu dem aktuellen Monat hinzu
 				xmlService.addStartTag("month");
-				xmlService.addContentToNode(
-						"monthName", monthList.get(currentMonth));
+				xmlService.addContentToNode("monthName", monthList.get(currentMonth));
 				
 				// Hilfsvariable für Anzahl der Arbeitstage des aktuellen Monats
 				int localCountDays = 0;
@@ -125,8 +127,8 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 		}
 		xmlService.addRootEndTag();
 		
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("XML für unbestimmten Zeitraum:\n" + xmlService.getXML());
+		if (logger.isDebugEnabled()) {
+			logger.debug("XML für unbestimmten Zeitraum:\n" + xmlService.getXML());
 		}
 		
 		return xmlService.getXML();
@@ -234,8 +236,8 @@ public class WorkingDaysServiceImpl implements WorkingDaysService {
 		
 		xmlService.addRootEndTag();
 		
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("XML für spezifischen Zeitraum:\n" + xmlService.getXML());
+		if (logger.isDebugEnabled()) {
+			logger.debug("XML für spezifischen Zeitraum:\n" + xmlService.getXML());
 		}
 		
 		return xmlService.getXML();

@@ -1,8 +1,8 @@
 package de.sgirke.neuearbeit.service.impl;
 
 import de.sgirke.neuearbeit.service.XmlService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class XmlServiceImpl implements XmlService {
 	
 	/** Logger-Objekt */
-	private static final Log LOG = LogFactory.getLog(XmlServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(XmlServiceImpl.class);
 	
 	/** StringBuffer-Objekt zum Speichern der XML-Daten als String-Repräsentation */
 	private StringBuffer xmlBuffer;
@@ -57,8 +57,8 @@ public class XmlServiceImpl implements XmlService {
 	 */
 	public void addContentToNode(String tagName, Object content) {
 		if (content == null) {
-			if (LOG.isWarnEnabled()) {
-				LOG.warn("Inhalt für Knoten '" + tagName + "' ist NULL");
+			if (logger.isWarnEnabled()) {
+				logger.warn("Inhalt für Knoten '" + tagName + "' ist NULL");
 			}
 		}
 		
