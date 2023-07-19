@@ -9,8 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class MainControllerTest {
 
+    private final MainController mainController;
+
     @Autowired
-    private MainController mainController;
+    public MainControllerTest(MainController mainController) {
+        this.mainController = mainController;
+    }
 
     @Test
     public void contextLoads() {
