@@ -36,6 +36,7 @@ public class HolidayServiceImpl implements HolidayService {
 			// Füge feste Feiertage hinzu
 			holidayList.add(new Holiday("Neujahrstag", new GregorianCalendar(year, Calendar.JANUARY, 1)));
 			holidayList.add(new Holiday("Maifeiertag", new GregorianCalendar(year, Calendar.MAY, 1)));
+			holidayList.add(new Holiday("Weltkindertag", new GregorianCalendar(year, Calendar.SEPTEMBER, 20)));
 			holidayList.add(new Holiday("Tag der Deutschen Einheit", new GregorianCalendar(year, Calendar.OCTOBER, 3)));
 			holidayList.add(new Holiday("Reformationstag", new GregorianCalendar(year, Calendar.OCTOBER, 31)));
 			holidayList.add(new Holiday("Erster Weihnachtsfeiertag", new GregorianCalendar(year, Calendar.DECEMBER, 25)));
