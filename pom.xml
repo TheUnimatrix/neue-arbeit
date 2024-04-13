@@ -14,7 +14,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.1</version>
+    <version>3.2.4</version>
   </parent>
 
   <properties>
@@ -38,11 +38,6 @@
       <groupId>org.apache.xmlgraphics</groupId>
       <artifactId>fop</artifactId>
       <version>2.9</version>
-    </dependency>
-    <dependency><!-- Aktuellere Dependency für Spring-Boot (Web), weil sonst Vulnerability-Warnung erscheint -->
-      <groupId>org.yaml</groupId>
-      <artifactId>snakeyaml</artifactId>
-      <version>2.2</version>
     </dependency>
 
     <!-- TEST-Dependencies -->
